@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create User</title>
+    {% include 'include.html' %}
+  </head>
+
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="card container my-4">
+      <div class="card-header">Register User</div>
+      <div class="card-body">
+        <form action="{% url 'user_app:create_user' %}" method="post">
+          {% csrf_token %}
+          <!-- Input type text -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              id="name"
+              placeholder="placeholder"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="name">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              id="username"
+              placeholder="placeholder"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="name">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              id="password"
+              placeholder="placeholder"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="group">Group</label>
+            <div class="">
+              <select
+                style=""
+                class="form-control custom-select ss"
+                id="group"
+                name="group"
+              >
+                <option selected="" value="staff_">Staff</option>
+                <option value="doctor">Doctor</option>
+                <option value="admin_">admin</option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            name="button_id_5"
+            id="button_id_5"
+          >
+            submit
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">username</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+
+          <tr>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.first_name}}</td>
+            <td>{{user.username}}</td>
+            <td>
+                {% for group_name in user.groups %}
+                  {{group_name}}
+                {% endfor %}
+            </td>
+            <td>
+              <form action="{% url 'user_app:delete_user' %}" method="post">
+                <input type="number" name="id" value="{{user.id}}" hidden>
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+{% include 'include.html' %}
+
+<head>
+    <title>Patient</title>
+</head>
+
+<body>
+
+
+    {% include 'navbar.html' %}
+    <h1>Patient</h1>
+
+    <div class="container">
+
+        {% include 'patient_detail.html' %}
+    </div>
+    <div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment-tab-pane"
+                    type="button" role="tab" aria-controls="payment-tab-pane" aria-selected="true">Payment</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="med_test1-tab" data-bs-toggle="tab" data-bs-target="#med_test1-tab-pane"
+                    type="button" role="tab" aria-controls="med_test1-tab-pane" aria-selected="false">med_test1</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                    type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">med_test2</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+                    type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Receipts</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
+                    type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false"
+                    disabled>Disabled</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="payment-tab-pane" role="tabpanel" aria-labelledby="payment-tab"
+                tabindex="0">
+                <div class="container">
+                    {% include 'patient_app/helper/payment.html' %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="med_test1-tab-pane" role="tabpanel" aria-labelledby="med_test1-tab"
+                tabindex="0">
+                <div class="container">
+                    {% include 'patient_app/helper/med_test1_helper.html' %}
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                med_test2
+
+            </div>
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+
+                <div class="container">
+                    {{rcpts}}
+                </div>
+
+
+
+            </div>
+            <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab"
+                tabindex="0">...</div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

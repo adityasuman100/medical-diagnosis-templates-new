@@ -1,0 +1,96 @@
+{% include 'include.html' %}
+{% include 'navbar.html' %}
+{% include 'messages.html' %}
+
+
+
+<div class="container p-4 border rounded">
+    <table class="table">
+        <div class="md-2">
+            <form id="date_form" action="{{ request.build_absolute_uri }}" method="get" class="d-flex" role="search">
+                <input id="date_input" class="" type="date" onchange="this.form.submit()" name="date">
+            </form>
+        </div>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in patients %}
+
+
+            <tr class="">
+                <th scope="row">{{p.id}}</th>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.gender}}</td>
+                <td>{{p.created_date}}</td>
+                <td>
+
+                    {% if p.med_test1 and p.med_test1_report and p.med_test1_report.validated_by %}
+                    <form action="{% url 'med_test1_app:generate_pdf_new' %}" method="get">
+                        <input type="number" name="id" id="id" value="{{p.id}}" hidden>
+                        <button class="btn btn-success" type="submit">Generate PDF</button>
+                    </form>
+
+                    {%elif p.med_test1 and p.med_test1_report %}
+                    <form action="{% url 'med_test1_app:read_med_test1_report' %}" method="get">
+                        <input type="number" name="id" id="id" value="{{p.id}}" hidden>
+                        <button class="btn btn-success" type="submit">Validate</button>
+                    </form>
+                    {%elif p.med_test1 %}
+                    <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="get">
+                        <input type="number" name="id" id="id" value="{{p.id}}" hidden>
+                        <button class="btn btn-success" type="submit">Create</button>
+                    </form>
+                    {% endif %}
+                </td>
+
+            </tr>
+
+
+
+            {% endfor %}
+
+
+            {% for r in receipts %}
+            <tr class="">
+                <th scope="row">{{r.patient.id}}</th>
+                <td>{{r.patient.name}}</td>
+                <td>{{r.patient.age}}</td>
+                <td>{{r.patient.gender}}</td>
+                <td>{{r.patient.created_date}}</td>
+                <td>
+
+                    {% if r.med_test1 and r.patient.med_test1_report and r.patient.med_test1_report.validated_by %}
+                    <form action="{% url 'med_test1_app:read_med_test1_report' %}" method="get">
+                        <input type="number" name="id" id="id" value="{{r.patient.id}}" hidden>
+                        <button class="btn btn-success" type="submit">View Report</button>
+                    </form>
+
+                    {%elif r.med_test1 and r.patient.med_test1_report %}
+                    <form action="{% url 'med_test1_app:read_med_test1_report' %}" method="get">
+                        <input type="number" name="id" id="id" value="{{p.id}}" hidden>
+                        <button class="btn btn-success" type="submit">Validate</button>
+                    </form>
+                    {%elif r.med_test1 %}
+                    <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="get">
+                        <input type="number" name="id" id="id" value="{{r.patient.id}}" hidden>
+                        <button class="btn btn-success" type="submit">Echo Template</button>
+                    </form>
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>

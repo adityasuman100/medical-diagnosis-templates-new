@@ -1,0 +1,26 @@
+{% include "include.html" %}
+{% include "navbar.html" %}
+<body>
+    <form action="{% url 'med_test2_app:Create_5' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1" class="form-control" id="med_test2_1_report" rows=""><p><strong>REPORT:</strong></p><p>External llac vein, common femoral vein, superficial femoral vein, popliteal vein, cali vein, anterior and posterior tibial vena dcommitanes show normal anechoic appearance and compressibility;<br>they show normal homogenous colour filling with normal wave form, spectral indices, respiratory phasicity and augmentation on distal compression.<br>Few enlarged inguinal lymph node are noted.</p><p><strong>Impression</strong><br>No definite evidence of DVT in lower limb.</p></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+
+    
+    
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#med_test2_1_report'))
+            .catch(error => {
+                console.error(error);
+            });
+        
+    </script>
+</body>

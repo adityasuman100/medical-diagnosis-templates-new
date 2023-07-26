@@ -1,0 +1,24 @@
+{% if data.med_test2 %}
+    {% if patient.med_test2 and patient.med_test2.validated_by %}
+    <a type="button" href="/echo/read/?id={{patient.id}}">
+        <button class="btn btn-primary">Read</button>
+    </a>
+    <a type="button" href="/echo/update/?id={{patient.id}}">
+        <button class="btn btn-primary">Update</button>
+    </a>
+    {% elif patient.echo_report %}
+        <form action="/echo/read/" method="get">
+
+            <input type="number" value="{{patient.id}}" name="id" hidden>
+            <button class="btn btn-primary mx-2" type="submit">Validate</button>
+        </form>
+    {%else%}
+        <a type="button" href="/echo/create/?id={{patient.id}}">
+            <button class="btn btn-primary">Generate</button>
+        </a>
+    {% endif %}
+
+{% else %}
+
+first do payment
+{% endif %}

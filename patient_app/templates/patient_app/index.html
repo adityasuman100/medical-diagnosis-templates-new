@@ -1,0 +1,239 @@
+{% include 'include.html' %}
+
+<!-- {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %} -->
+
+{% include 'navbar.html' %} {% include 'messages.html' %}
+
+<div class="container bg-secondary-subtle p-4">
+    <form action="/patient" method="get">
+        <input type="date" name="date" onchange="this.form.submit()" />
+    </form>
+    <table class="table table-secondary">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Gender</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in patients %}
+
+            {% if p.med_test1 %}
+
+            <tr class="">
+                <th scope="row">{{p.id}}</th>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.gender}}</td>
+
+                {% if p.med_test1_report and p.med_test1_report.validated_by %}
+                <td>
+                    <form action="{% url 'med_test1_app:read_med_test1_report' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">View Echo</button>
+                    </form>
+                </td>
+                {% elif p.med_test1_report %}
+                <td>
+                    <form action="{% url 'med_test1_app:read_med_test1_report' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">Validate Echo</button>
+                    </form>
+                </td>
+                {% else %}
+                <td>
+                    <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">Echo Template</button>
+                    </form>
+                </td>
+                {% endif %}
+
+
+            </tr>
+            {% endif %}
+
+            {% if p.med_test2_1 %}
+            <tr class="">
+                <th scope="row">{{p.id}}</th>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.gender}}</td>
+
+                {% if p.med_test2_1_report and p.med_test2_1_report.validated_by %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_1' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">View USG ABDOMEN</button>
+                    </form>
+                </td>
+                {% elif p.med_test2_1_report %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_1' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">Validate USG ABDOMEN</button>
+                    </form>
+                </td>
+                {% else %}
+                <td>
+                    <form action="{% url 'med_test2_app:Create_1' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">USG ABDOMEN Template</button>
+                    </form>
+                </td>
+                {% endif %}
+
+
+            </tr>
+            {% endif %}
+
+            {% if p.med_test2_2 %}
+            <tr class="">
+                <th scope="row">{{p.id}}</th>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.gender}}</td>
+
+                {% if p.med_test2_2_report and p.med_test2_2_report.validated_by %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_2' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">View USG BREAST</button>
+                    </form>
+                </td>
+                {% elif p.med_test2_2_report %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_2' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">Validate USG BREAST</button>
+                    </form>
+                </td>
+                {% else %}
+                <td>
+                    <form action="{% url 'med_test2_app:Create_2' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">USG BREAST Template</button>
+                    </form>
+                </td>
+                {% endif %}
+
+
+            </tr>
+            {% endif %}
+
+            {% if p.med_test2_3 %}
+            <tr class="">
+                <th scope="row">{{p.id}}</th>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.gender}}</td>
+
+                {% if p.med_test2_3_report and p.med_test2_3_report.validated_by %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_3' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">View USG PELVIS</button>
+                    </form>
+                </td>
+                {% elif p.med_test2_3_report %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_3' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">Validate USG PELVIS</button>
+                    </form>
+                </td>
+                {% else %}
+                <td>
+                    <form action="{% url 'med_test2_app:Create_3' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">USG PELVIS Template</button>
+                    </form>
+                </td>
+                {% endif %}
+
+
+            </tr>
+            {% endif %}
+
+            {% if p.med_test2_4 %}
+            <tr class="">
+                <th scope="row">{{p.id}}</th>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.gender}}</td>
+
+                {% if p.med_test2_4_report and p.med_test2_4_report.validated_by %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_4' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">View USG KUB</button>
+                    </form>
+                </td>
+                {% elif p.med_test2_4_report %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_4' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">Validate USG KUB</button>
+                    </form>
+                </td>
+                {% else %}
+                <td>
+                    <form action="{% url 'med_test2_app:Create_4' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">USG KUB Template</button>
+                    </form>
+                </td>
+                {% endif %}
+
+
+            </tr>
+            {% endif %}
+
+            {% if p.med_test2_5 %}
+            <tr class="">
+                <th scope="row">{{p.id}}</th>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.gender}}</td>
+
+                {% if p.med_test2_5_report and p.med_test2_5_report.validated_by %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_5' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">View DOPPLER LOWER LIMB</button>
+                    </form>
+                </td>
+                {% elif p.med_test2_5_report %}
+                <td>
+                    <form action="{% url 'med_test2_app:Read_5' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">Validate DOPPLER LOWER LIMB</button>
+                    </form>
+                </td>
+                {% else %}
+                <td>
+                    <form action="{% url 'med_test2_app:Create_5' %}" method="get">
+                        <input type="number" name="id" value="{{p.id}}" hidden />
+                        <button class="btn btn-success" type="submit">DOPPLER LOWER LIMB Template</button>
+                    </form>
+                </td>
+                {% endif %}
+
+
+            </tr>
+            {% endif %}
+
+            
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Patient</title>
+    {% include 'include.html' %}
+
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+
+
+    <div class="card container my-4">
+        <div class="card-header">Register Patient</div>
+        <div class="card-body">
+
+            <form action="{% url 'patient_app:create_patient' %}" method="post">
+                {% csrf_token %}
+                <!-- Input type text -->
+                <div class="form-group mb-2">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="placeholder" required>
+                </div>
+
+                <!-- Input text grid -->
+                <div class="form-group">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label>Age</label>
+                            <input type="number" name="age" id="age" class="form-control" placeholder="placeholder 1">
+                        </div>
+                        <div class="col">
+                            <label for="select_id_4">Gender</label>
+                            <select name="gender" class="form-select" aria-label="Default select example">
+                                <option value="Male" selected>Male</option>
+                                <option value="Female">Female</option>
+
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label>Mobile No.</label>
+                            <input type="text" class="form-control" name="mob_no" id="mob_no" placeholder="placeholder">
+                        </div>
+                        <div class="col">
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="form-group mb-2">
+                    <input name="med_test1" class="form-check-input" type="checkbox" value="True" id="">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Echocardiography
+                    </label>
+                    <input name="med_test2_1" class="form-check-input" type="checkbox" value="True" id="">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        USG ABDOMEN
+                    </label>
+                    <input name="med_test2_2" class="form-check-input" type="checkbox" value="True" id="">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        USG BREAST
+                    </label>
+                    <input name="med_test2_3" class="form-check-input" type="checkbox" value="True" id="">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        USG PELVIS
+                    </label>
+                    <input name="med_test2_4" class="form-check-input" type="checkbox" value="True" id="">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        USG KUB
+                    </label>
+                    <input name="med_test2_5" class="form-check-input" type="checkbox" value="True" id="">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        DOPPLER LOWER LIMB
+                    </label>
+                </div>
+                <div class="form-outline mb-2">
+                    <label class="form-label" for="textAreaExample">Address</label>
+                    <textarea name="address" class="form-control" id="textAreaExample1" rows="4"></textarea>
+
+
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary" name="button_id_5" id="button_id_5">submit</button>
+            </form>
+
+
+        </div>
+    </div>
+
+    {% include 'patient_app/patients_table.html' %}
+
+
+</body>
+
+</html>

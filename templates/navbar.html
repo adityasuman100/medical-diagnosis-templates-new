@@ -1,0 +1,79 @@
+{% include 'include.html' %}
+
+
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'patient_app:create_patient' %}">Patient</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'patient_app:index' %}">Report Entry</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'patient_app:print_report' %}">Print Report</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'user_app:create_user' %}">Users</a></li>
+                        {% comment %} <li><a class="dropdown-item" href="{% url 'user_app:receipt' %}">Receipts</a></li>
+                        <li><a class="dropdown-item" href="{% url 'user_app:constant' %}">Constant</a></li> {% endcomment %}
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+                <li class="nav-item">
+                    <form action="/logout/" method="post" class="d-flex" role="search">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-danger" type="submit">Logout</button>
+                    </form>
+                </li>
+                
+
+            </ul>
+
+            <div>
+                {{user.username}}
+            </div>
+
+
+            <div>
+                <form action="{% url 'patient_app:read_patient' %}" method="get" class="d-flex" role="search">
+                    <input class="form-control me-2" type="number" placeholder="Search" aria-label="Search" name="id">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% include 'footer.html' %}
+
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" data-mdb-autohide="true" >
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+{% endif %}
+
+

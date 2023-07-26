@@ -1,0 +1,24 @@
+{% include "include.html" %}
+{% include "navbar.html" %}
+<body>
+    <form action="{% url 'med_test2_app:Update_1' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1" class="form-control" id="med_test2_1_report" rows="">{{patient.med_test2_1_report.t1}}</textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#med_test2_1_report'))
+            .catch(error => {
+                console.error(error);
+            });
+        
+    </script>
+</body>

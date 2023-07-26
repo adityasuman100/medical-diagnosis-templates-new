@@ -1,0 +1,698 @@
+{
+  " bootstrap checkbox": {
+    "prefix": " bootstrap checkbox",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<div class=\"form-check\">",
+      "  <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"flexCheckDefault\">",
+      "  <label class=\"form-check-label\" for=\"flexCheckDefault\">",
+      "    Default checkbox",
+      "  </label>",
+      "</div>"
+    ]
+  },
+  " redirect user to same url": {
+    "prefix": " redirect user to same url",
+    "description": "redirect the user from where it has requested.",
+    "scope": "python",
+    "body": [
+      "return redirect(request.META.get('HTTP_REFERER'))"
+    ]
+  },
+  " django messages": {
+    "prefix": " django messages",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% if messages %}",
+      "    <ul class=\"messages\">",
+      "        {% for message in messages %}",
+      "            <li{% if message.tags %} class=\"{{ message.tags }}\"{% endif %}>{{ message }}</li>",
+      "        {% endfor %}",
+      "    </ul>",
+      "{% endif %}"
+    ]
+  },
+  " know current url or base url in django": {
+    "prefix": " know current url or base url in django",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<p>Current Base URL: {{ request.scheme }}://{{ request.get_host }}/</p>",
+      "<p>Current URL: {{ request.build_absolute_uri }}</p>"
+    ]
+  },
+  " django post request through javascript": {
+    "prefix": " django post request through javascript",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<script>",
+      "    var form = document.getElementById('form');",
+      "    const csrftoken = '{{csrf_token}}';",
+      "    form.addEventListener('submit', function (e) {",
+      "        e.preventDefault();",
+      "        const formData = new FormData(form);",
+      "        fetch('/echo/test/', {",
+      "            method: 'post',",
+      "            headers: {",
+      "                'Content-Type': 'application/json',",
+      "                'X-CSRFToken': csrftoken  // Include the CSRF token in the headers",
+      "            },",
+      "            body: formData",
+      "        })",
+      "            .then(response => {",
+      "                console.log(response)",
+      "                if (response.ok) {",
+      "                    console.log('form submitted successfully.')",
+      "                }",
+      "            })",
+      "    });",
+      "",
+      "",
+      "</script>"
+    ]
+  },
+  " django generate unique id": {
+    "prefix": " django generate unique id",
+    "description": "",
+    "scope": "python",
+    "body": [
+      "def generate_unique_id():",
+      "    current_datetime = datetime.datetime.now()",
+      "    unique_id = current_datetime.strftime('%Y%m%d%H%M%S%f') + str(uuid.uuid4().hex)[:6]",
+      "    return unique_id"
+    ]
+  },
+  " django current datetime in string": {
+    "prefix": " django current datetime in string",
+    "description": "",
+    "scope": "python",
+    "body": [
+      "datetime.datetime.now().strftime('%Y%m%d%H%M%S')"
+    ]
+  },
+  " jinja if only": {
+    "prefix": " jinja if only",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% if $1 %}",
+      "    $2",
+      "{% endif %}$3"
+    ]
+  },
+  " jinja if only inline": {
+    "prefix": " jinja if only inline",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% if $1 %} $2 {% endif %}$3"
+    ]
+  },
+  " jinja if else": {
+    "prefix": " jinja if else",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% if $1 %}",
+      "    $2",
+      "{% else %}",
+      "    $3",
+      "{% endif %}$4"
+    ]
+  },
+  " jinja if else inline": {
+    "prefix": " jinja if else inline",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% if $1 %} $2 {% else %} $3 {% endif %}$4"
+    ]
+  },
+  " jinja for loop": {
+    "prefix": " jinja for loop",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% for $1 in $2 %}",
+      "    $3",
+      "{% endfor %}$4"
+    ]
+  },
+  " jinja include": {
+    "prefix": " jinja include",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% include \"${1:template_name.html}\" %}"
+    ]
+  },
+  " jinja extends": {
+    "prefix": " jinja extends",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% extends \"${1:base_template.html}\" %}"
+    ]
+  },
+  " jinja comment": {
+    "prefix": " jinja comment",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{# $1 #}$2"
+    ]
+  },
+  " django reverse url": {
+    "prefix": " django reverse url",
+    "description": "reverse, generate url from the view name of the app",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "{% url '${1:your_app_name}:${2:your_view_name}' %}$3"
+    ]
+  },
+  " django date input for patient": {
+    "prefix": " django date input for patient",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<div class=\"md-2\">",
+      "    <form id=\"date_form\" action=\"{{ request.build_absolute_uri }}\" method=\"get\" class=\"d-flex\" role=\"search\">",
+      "        <input id=\"date_input\" class=\"\" type=\"date\" onchange=\"this.form.submit()\" name=\"date\">",
+      "    </form>",
+      "</div>"
+    ]
+  },
+  " django reverse url1": {
+    "prefix": " django reverse url1",
+    "description": "",
+    "scope": "python",
+    "body": [
+      "return redirect(reverse('${1:app_name}:${2:view_name}')$3)"
+    ]
+  },
+  " mantine use-form": {
+    "prefix": " mantine use-form",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "import { TextInput, Checkbox, Button, Group, Box } from '@mantine/core';",
+      "import { useForm } from '@mantine/form';",
+      "",
+      "function Demo() {",
+      "  const form = useForm({",
+      "    initialValues: {",
+      "      email: '',",
+      "      termsOfService: false,",
+      "    },",
+      "",
+      "    validate: {",
+      "      email: (value) => (/^\\S+@\\S+$/.test(value) ? null : 'Invalid email'),",
+      "    },",
+      "  });",
+      "",
+      "  return (",
+      "    <Box maw={300} mx=\"auto\">",
+      "      <form onSubmit={form.onSubmit((values) => console.log(values))}>",
+      "        <TextInput",
+      "          withAsterisk",
+      "          label=\"Email\"",
+      "          placeholder=\"your@email.com\"",
+      "          {...form.getInputProps('email')}",
+      "        />",
+      "",
+      "        <Checkbox",
+      "          mt=\"md\"",
+      "          label=\"I agree to sell my privacy\"",
+      "          {...form.getInputProps('termsOfService', { type: 'checkbox' })}",
+      "        />",
+      "",
+      "        <Group position=\"right\" mt=\"md\">",
+      "          <Button type=\"submit\">Submit</Button>",
+      "        </Group>",
+      "      </form>",
+      "    </Box>",
+      "  );",
+      "}"
+    ]
+  },
+  " mantine Autocomplete core": {
+    "prefix": " mantine Autocomplete core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<Autocomplete",
+      "    label=\"Your favorite framework/library\"",
+      "    placeholder=\"Pick one\"",
+      "    data={['React', 'Angular', 'Svelte', 'Vue']}",
+      "/>"
+    ]
+  },
+  " mantine Checkbox core": {
+    "prefix": " mantine Checkbox core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<Checkbox",
+      "    label=\"I agree to sell my privacy\"",
+      "    radius=\"md\"",
+      "    size=\"md\"",
+      "/>"
+    ]
+  },
+  " mantine MultiSelect core": {
+    "prefix": " mantine MultiSelect core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<MultiSelect",
+      "    data={data}",
+      "    label=\"Your favorite frameworks/libraries\"",
+      "    placeholder=\"Pick all that you like\"",
+      "/>"
+    ]
+  },
+  " mantine NumberInput core": {
+    "prefix": " mantine NumberInput core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<NumberInput",
+      "    defaultValue={18}",
+      "    placeholder=\"Your age\"",
+      "    label=\"Your age\"",
+      "    withAsterisk",
+      "/>"
+    ]
+  },
+  " mantine PasswordInput core": {
+    "prefix": " mantine PasswordInput core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<PasswordInput",
+      "    placeholder=\"Password\"",
+      "    label=\"Password\"",
+      "    description=\"Password must include at least one letter, number and special character\"",
+      "    withAsterisk",
+      "/>"
+    ]
+  },
+  " mantine PinInput core": {
+    "prefix": " mantine PinInput core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<PinInput length={6} />"
+    ]
+  },
+  " mantine Select core": {
+    "prefix": " mantine Select core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<Select",
+      "    label=\"Your favorite framework/library\"",
+      "    placeholder=\"Pick one\"",
+      "    data={[",
+      "    { value: 'react', label: 'React' },",
+      "    { value: 'ng', label: 'Angular' },",
+      "    { value: 'svelte', label: 'Svelte' },",
+      "    { value: 'vue', label: 'Vue' },",
+      "    ]}",
+      "/>"
+    ]
+  },
+  " mantine Textarea core": {
+    "prefix": " mantine Textarea core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<Textarea",
+      "    placeholder=\"Your comment\"",
+      "    label=\"Your comment\"",
+      "    withAsterisk",
+      "/>"
+    ]
+  },
+  " mantine TextInput core": {
+    "prefix": " mantine TextInput core",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<TextInput",
+      "    placeholder=\"Your name\"",
+      "    label=\"Full name\"",
+      "    withAsterisk",
+      "/>"
+    ]
+  },
+  " mantine Flex": {
+    "prefix": " mantine Flex",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<Flex",
+      "    gap=\"xl\"",
+      "    justify=\"space-between\"",
+      "    align=\"start\"",
+      "    direction=\"row\"",
+      "    wrap=\"wrap\"",
+      ">",
+      "",
+      "",
+      "</Flex>"
+    ]
+  },
+  " patients table": {
+    "prefix": " patients table",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<div class=\"container bg-secondary-subtle p-4\">",
+      "    <table class=\"table table-secondary\">",
+      "        <thead>",
+      "            <tr>",
+      "                <th scope=\"col\">ID</th>",
+      "                <th scope=\"col\">Name</th>",
+      "                <th scope=\"col\">Age</th>",
+      "                <th scope=\"col\">Gender</th>",
+      "            </tr>",
+      "        </thead>",
+      "        <tbody>",
+      "            {% for p in patients %}",
+      "                ",
+      "                {% if p.echo_payment %}",
+      "                    <tr class=\"table-success\">",
+      "                {% else %}",
+      "                    <tr class=\"table-danger\">",
+      "                {% endif %}",
+      "                        <th scope=\"row\">{{p.id}}</th>",
+      "                        <td>{{p.name}}</td>",
+      "                        <td>{{p.age}}</td>",
+      "                        <td>{{p.gender}}</td>",
+      "                        <td>",
+      "                            <form action=\"/patient/read/\" method=\"get\">",
+      "                                <input type=\"number\" name=\"id\" value=\"{{p.id}}\" hidden>",
+      "                                <button class=\"btn btn-success\" type=\"submit\">Edit</button>",
+      "                            </form>",
+      "                        </td>",
+      "                    ",
+      "                    </tr>",
+      "                ",
+      "                ",
+      "                ",
+      "            {% endfor %}",
+      "",
+      "        </tbody>",
+      "    </table>",
+      "</div>"
+    ]
+  },
+  " input date": {
+    "prefix": " input date",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<form id=\"date_form\" action=\"{{ request.build_absolute_uri }}\" method=\"get\" class=\"d-flex\" role=\"search\">",
+      "    <input id=\"date_input\" class=\"\" type=\"date\" onchange=\"this.form.submit()\" name=\"date\">",
+      "</form>"
+    ]
+  },
+  " AIIMS patna logo": {
+    "prefix": " AIIMS patna logo",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "https://aiimspatna.edu.in/img/aiimslogo2.jpeg"
+    ]
+  },
+  " tw large input": {
+    "prefix": " tw large input",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<!--Large input-->",
+      "<div class=\"relative mb-3\" data-te-input-wrapper-init>",
+      "  <input",
+      "    type=\"text\"",
+      "    class=\"peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0\"",
+      "    id=\"exampleFormControlInput2\"",
+      "    placeholder=\"Form control lg\" />",
+      "  <label",
+      "    for=\"exampleFormControlInput2\"",
+      "    class=\"pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary\"",
+      "    >Form control lg",
+      "  </label>",
+      "</div>"
+    ]
+  },
+  " tw span": {
+    "prefix": " tw span",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<span",
+      "    class=\"flex items-center whitespace-nowrap rounded-r border border-l-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200\"",
+      "    id=\"basic-addon2\"",
+      "    >@example.com</span",
+      "  >"
+    ]
+  },
+  " tw select": {
+    "prefix": " tw select",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<select data-te-select-init>",
+      "  <option value=\"1\">One</option>",
+      "  <option value=\"2\">Two</option>",
+      "  <option value=\"3\">Three</option>",
+      "  <option value=\"4\">Four</option>",
+      "  <option value=\"5\">Five</option>",
+      "  <option value=\"6\">Six</option>",
+      "  <option value=\"7\">Seven</option>",
+      "  <option value=\"8\">Eight</option>",
+      "</select>"
+    ]
+  },
+  " tw multiselect": {
+    "prefix": " tw multiselect",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<select data-te-select-init multiple>",
+      "  <option value=\"1\">One</option>",
+      "  <option value=\"2\">Two</option>",
+      "  <option value=\"3\">Three</option>",
+      "  <option value=\"4\">Four</option>",
+      "  <option value=\"5\">Five</option>",
+      "  <option value=\"6\">Six</option>",
+      "  <option value=\"7\">Seven</option>",
+      "  <option value=\"8\">Eight</option>",
+      "</select>",
+      "<label data-te-select-label-ref>Example label</label>"
+    ]
+  },
+  " tw textarea": {
+    "prefix": " tw textarea",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<div class=\"relative mb-3\" data-te-input-wrapper-init>",
+      "  <textarea",
+      "    class=\"peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0\"",
+      "    id=\"exampleFormControlTextarea1\"",
+      "    rows=\"3\"",
+      "    placeholder=\"Your message\"></textarea>",
+      "  <label",
+      "    for=\"exampleFormControlTextarea1\"",
+      "    class=\"pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary\"",
+      "    >Example textarea</label",
+      "  >",
+      "</div>"
+    ]
+  },
+  " tw datepicker": {
+    "prefix": " tw datepicker",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<div",
+      "  class=\"relative mb-3\"",
+      "  data-te-datepicker-init",
+      "  data-te-input-wrapper-init>",
+      "  <input",
+      "    type=\"text\"",
+      "    class=\"peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0\"",
+      "    placeholder=\"Select a date\" />",
+      "  <label",
+      "    for=\"floatingInput\"",
+      "    class=\"pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary\"",
+      "    >Select a date</label",
+      "  >",
+      "</div>"
+    ]
+  },
+  " tw label": {
+    "prefix": " tw label",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<label",
+      "  for=\"basic-url\"",
+      "  class=\"mb-2 inline-block text-neutral-700 dark:text-neutral-200\"",
+      "  >Your vanity URL</label",
+      ">"
+    ]
+  },
+  " Collapsible Example": {
+    "prefix": " Collapsible Example",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html>",
+      "<head>",
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+      "<style>",
+      ".collapsible {",
+      "  background-color: #777;",
+      "  color: white;",
+      "  cursor: pointer;",
+      "  padding: 18px;",
+      "  width: 100%;",
+      "  border: none;",
+      "  text-align: left;",
+      "  outline: none;",
+      "  font-size: 15px;",
+      "}",
+      "",
+      ".active, .collapsible:hover {",
+      "  background-color: #555;",
+      "}",
+      "",
+      ".content {",
+      "  padding: 0 18px;",
+      "  display: none;",
+      "  overflow: hidden;",
+      "  background-color: #f1f1f1;",
+      "}",
+      "</style>",
+      "</head>",
+      "<body>",
+      "",
+      "<h2>Collapsibles</h2>",
+      "",
+      "<p>A Collapsible:</p>",
+      "<button type=\"button\" class=\"collapsible\"><h2>Collapsibles</h2></button>",
+      "<div class=\"content\">",
+      "  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+      "</div>",
+      "",
+      "<p>Collapsible Set:</p>",
+      "<button type=\"button\" class=\"collapsible\">Open Section 1</button>",
+      "<div class=\"content\">",
+      "  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+      "</div>",
+      "<button type=\"button\" class=\"collapsible\">Open Section 2</button>",
+      "<div class=\"content\">",
+      "  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+      "</div>",
+      "<button type=\"button\" class=\"collapsible\">Open Section 3</button>",
+      "<div class=\"content\">",
+      "  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+      "</div>",
+      "",
+      "<script>",
+      "var coll = document.getElementsByClassName(\"collapsible\");",
+      "var i;",
+      "",
+      "for (i = 0; i < coll.length; i++) {",
+      "  coll[i].addEventListener(\"click\", function() {",
+      "    this.classList.toggle(\"active\");",
+      "    var content = this.nextElementSibling;",
+      "    if (content.style.display === \"block\") {",
+      "      content.style.display = \"none\";",
+      "    } else {",
+      "      content.style.display = \"block\";",
+      "    }",
+      "  });",
+      "}",
+      "</script>",
+      "",
+      "</body>",
+      "</html>"
+    ]
+  },
+  " Bootstrap cdn": {
+    "prefix": " Bootstrap cdn",
+    "description": "Bootstrap cdn for style sheet and script",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<!-- Bootstrap CSS v5.2.1 -->",
+      "    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css\" rel=\"stylesheet\"",
+      "        integrity=\"sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT\" crossorigin=\"anonymous\">",
+      "    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js\"></script>"
+    ]
+  },
+  " Bootstrap select": {
+    "prefix": " Bootstrap select",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<div class=\"col-sm-10 ss \">",
+      "                    <select style=\"\" class=\"form-control  custom-select ss \" id=\"t27\" name=\"t27\">",
+      "                        <option selected=\"\" value=\"Normal\"> Normal</option>",
+      "                        <option value=\"Thickened\">Thickened</option>",
+      "                        <option value=\"Calcification\">Calcification</option>",
+      "                        <option value=\"Thickened, Calcification\">Thickened, Calcification</option>",
+      "                        <option value=\"Bicuspid, Aortic Valve\">Bicuspid, Aortic Valve</option>",
+      "",
+      "                    </select>",
+      "                </div>"
+    ]
+  },
+  " Javascript for collapsible": {
+    "prefix": " Javascript for collapsible",
+    "description": "it will collapse the just next sibling of the target element on value change",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<script>",
+      "    function handleInputChange(event) {",
+      "        const targetElement = event.target;",
+      "        var content = targetElement.nextElementSibling;",
+      "        if (content.style.display === \"block\") {",
+      "            content.style.display = \"none\";",
+      "        } else {",
+      "            content.style.display = \"block\";",
+      "        }",
+      "    }",
+      "",
+      "    const collapsibleInputs = document.querySelectorAll('.collapsible');",
+      "    collapsibleInputs.forEach(function (input) {",
+      "        input.addEventListener('input', handleInputChange);",
+      "    });",
+      "</script>"
+    ]
+  },
+  " element is not visible but takes space": {
+    "prefix": " element is not visible but takes space",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<div style=\"visibility: hidden;\">This element is hidden but still takes up space.</div>",
+      "<div style=\"opacity: 0;\">This element is transparent but still takes up space.</div>"
+    ]
+  },
+  " element is not visible and does not take space": {
+    "prefix": " element is not visible and does not take space",
+    "description": "",
+    "scope": "html, javascript, typescript",
+    "body": [
+      "<div style=\"display: none;\">This element is hidden and doesn't take up space.</div>"
+    ]
+  }
+}

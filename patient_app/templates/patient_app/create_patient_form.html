@@ -1,0 +1,39 @@
+<div class="card container my-4">
+    <div class="card-header">Register Patient</div>
+    <div class="card-body">
+
+        <form action="{% url 'patient_app:create_patient' %}" method="post">
+            {% csrf_token %}
+            <!-- Input type text -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="placeholder" required>
+            </div>
+
+            <!-- Input text grid -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label>Age</label>
+                        <input type="number" name="age" id="age" class="form-control" placeholder="placeholder 1">
+                    </div>
+                    <div class="col">
+                        <label for="select_id_4">Select</label>
+                        <select class="custom-select" name="gender" id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary" name="button_id_5" id="button_id_5">submit</button>
+        </form>
+
+
+    </div>
+</div>

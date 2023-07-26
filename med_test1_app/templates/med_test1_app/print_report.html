@@ -1,0 +1,33 @@
+{% include 'include.html' %}
+{% include 'navbar.html' %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Print</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in patients %}
+            {% if p.med_test1_report and p.med_test1_report.validated_by %}
+                <tr>
+                    <th scope="row">{{p.id}}</th>
+                    <td>{{p.name}}</td>
+                    <td>{{p.age}}</td>
+                    <td>{{p.gender}}</td>
+                    <td>
+                        <form action="{% url 'med_test1_app:generate_pdf_new' %}" method="get">
+                            <input type="number" name="id" value="{{p.id}}" hidden>
+                            <button type="submit" class="btn btn-primary">Print</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+
+    </tbody>
+</table>

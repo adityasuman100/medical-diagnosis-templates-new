@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body class="medium">
+    <header>
+        {% include 'navbar.html' %}
+        <div class="d-flex flex-row justify-content-between text-center">
+            <div class="">
+                <img style="width: 150px;" class="" src="https://aiimspatna.edu.in/img/aiimslogo2.jpeg" alt="Image">
+            </div>
+            <div>
+                <h3>HN Diagnostic Center</h3>
+                <h4>Phulwarisharif, AIIMS Patna Pin 801507</h4>
+                <h5>Mob no. 9999999999</h5>
+            </div>
+            <div class="">
+                <img style="width: 150px; visibility: hidden;" class=""
+                    src="https://aiimspatna.edu.in/img/aiimslogo2.jpeg" alt="">
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="text-center m-4">
+            <h5>Department of Cardiology</h5>
+        </div>
+        <div class="p-5" id="pdf">
+            <div class="">
+
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th>ID </th>
+                            <td>{{patient.id}}</td>
+                            <th>Lab No. </th>
+                            <td>109112301415888</td>
+                            <th>Procedure Date </th>
+                            <td>{{patient.created_date}} {{patient.created_time}}</td>
+                        </tr>
+                        <tr>
+                            <th>Patient Name</th>
+                            <td> {{patient.name}}</td>
+                            <th>Age/Sex </th>
+                            <td>{{patient.age}} yrs /{{patient.gender}}</td>
+                            <th>Reporting Date </th>
+                            <td> {{patient.med_test1_report.created_date}} {{patient.med_test1_report.created_time}}</td>
+                        </tr>
+                        <tr>
+                            <th>Mobile No. </th>
+                            <td>{{patient.mob_no}} </td>
+                            <th>Address</th>
+                            <td>{{patient.address}}</td>
+                        </tr>
+                        
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="text-center mt-4">
+                <h5>Echocardiography</h5>
+            </div>
+            <table class="table table-borderless">
+
+                <tbody>
+                    
+
+                    <tr>
+                        <th scope="row">MEASUREMENTS</th>
+                        <td>VALUES</td>
+                        <td>NORMAL Val.</td>
+                        <td>MEASUREMENTS</td>
+                        <td>VALUES</td>
+                        <td>NORMAL Val.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">IVsd</th>
+                        <td>{{patient.med_test1_report.t1}}</td>
+                        <td>(0.6-1.0)cm</td>
+                        <td>IVSs</td>
+                        <td>{{patient.med_test1_report.t7}}</td>
+                        <td>(0.7-1.2)cm</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">LVIDd</th>
+                        <td>{{patient.med_test1_report.t3}}</td>
+                        <td>(3.6-5.5)cm</td>
+                        <td>LVIDs</td>
+                        <td>{{patient.med_test1_report.t9}}</td>
+                        <td>(2.0-4.0)cm</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">LVPWd</th>
+                        <td>{{patient.med_test1_report.t5}}</td>
+                        <td>(0.6-1.0)cm</td>
+                        <td>LVPWs</td>
+                        <td>{{patient.med_test1_report.t11}}</td>
+                        <td>(0.8-1.2)cm</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">LVEF</th>
+                        <td>{{patient.med_test1_report.t13}}</td>
+                        <td>(>=50%)</td>
+                        <td>FS</td>
+                        <td>{{patient.med_test1_report.t12}}</td>
+                        <td>(>=25%)</td>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <th scope="row">RWMA</th>
+                        <td>{{patient.med_test1_report.t14}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    {% if patient.med_test1_report.t14 != 'Absent' %}
+                    <tr>
+                        <th scope="row">BASAL LV</th>
+                        <td>{{patient.med_test1_report.t14_1}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">MID LV</th>
+                        <td>{{patient.med_test1_report.t14_2}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">APICAL LV</th>
+                        <td>{{patient.med_test1_report.t14_3}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">LV APEX</th>
+                        <td>{{patient.med_test1_report.t14_4}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+
+                    <tr>
+                        <th scope="row">Aorta</th>
+                        <td>{{patient.med_test1_report.t2}}</td>
+                        <td>(2.0-4.0)cm</td>
+                        <th>LA</th>
+                        <td>{{patient.med_test1_report.t4}}</td>
+                        <td>(2.0-4.0)cm</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">TAPSE</th>
+                        <td>{{patient.med_test1_report.t10}}</td>
+                        <td>(>=1.7)cm</td>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <th scope="row">MITRAL VALVE</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Morphology</th>
+                        <td>{{patient.med_test1_report.t15}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% if patient.med_test1_report.t15 != 'Normal' %}
+                      
+                        <tr>
+                            <th scope="row">AML</th>
+                            <td>{{patient.med_test1_report.t15_1}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">PML</th>
+                            <td>{{patient.med_test1_report.t15_2}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <th scope="row">Doppler(cm/s)</th>
+                        <td>E(cm/s)</td>
+                        <td>A(cm/s)</td>
+                        <td>DT</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t16}}</td>
+                        <td>{{patient.med_test1_report.t17}}</td>
+                        <td>{{patient.med_test1_report.t18}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Tissue Doppler</th>
+                        <td>E''</td>
+                        <td>A''</td>
+                        <td>E/e''</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t19}}</td>
+                        <td>{{patient.med_test1_report.t20}}</td>
+                        <td>{{patient.med_test1_report.t21}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Diastolic Function</th>
+                        <td>{{patient.med_test1_report.t22}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">MITRAL STENOSIS</th>
+                        <td>{{patient.med_test1_report.t23}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% if patient.med_test1_report.t23 != 'Absent' %}
+                    <tr>
+                        <th scope="row">Gradient</th>
+                        <td>Peak Diastolic</td>
+                        <td>Mean Diastolic(mmHg)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t23_1}}</td>
+                        <td>{{patient.med_test1_report.t23_2}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">MVA</th>
+                        <td>By Planimetry(cmsq)</td>
+                        <td>By PHT(cmsq)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t23_3}}</td>
+                        <td>{{patient.med_test1_report.t23_4}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Mitral Annulus(cm)</th>
+                        <td>{{patient.med_test1_report.t23_5}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <th scope="row">MITRAL REGURGITATION</th>
+                        <td>{{patient.med_test1_report.t24}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% if patient.med_test1_report.t24 != 'Absent' %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>A4C LA Area(cmsq)</td>
+                        <td>JetArea(cmsq)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t24_1}}</td>
+                        <td>{{patient.med_test1_report.t24_2}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+
+                    <tr>
+                        <th scope="row">AORTIC VALVE</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Morphology</th>
+                        <td>{{patient.med_test1_report.t25}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Doppler</th>
+                        <td>Aortic peak systolic velocity(cm/sec)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t26}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Aortic Stenosis</th>
+                        <td>{{patient.med_test1_report.t27}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    {% if patient.med_test1_report.t27 != 'Absent' %}
+                    <tr>
+                        <th scope="row">Gradient</th>
+                        <td>Peak Systolic(mmHg)</td>
+                        <td>Mean Systolic(mmHg)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t27_1}}</td>
+                        <td>{{patient.med_test1_report.t27_2}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">AVA</th>
+                        <td>By Planimetry(cmsq)</td>
+                        <td>Aortic Annulus(cm)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t27_3}}</td>
+                        <td>{{patient.med_test1_report.t27_4}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Aorta at Sinus (cm)</td>
+                        <td>Ascending Arota at STJ (cm)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t27_5}}</td>
+                        <td>{{patient.med_test1_report.t27_6}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+
+                    <tr>
+                        <th scope="row">Aortic Regurgitation</th>
+                        <td>{{patient.med_test1_report.t28}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    {% if patient.med_test1_report.t28 != 'Absent' %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>AR Jet PHT(msec)</td>
+                        <td>AR Vena Contractra(mm)</td>
+                        <td>AR Jet(msec)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t28_1}}</td>
+                        <td>{{patient.med_test1_report.t28_2}}</td>
+                        <td>{{patient.med_test1_report.t28_3}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                    
+                    <tr>
+                        <th scope="row">TRISCUPID VALVE</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Morphology</th>
+                        <td>{{patient.med_test1_report.t29}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Tricuspid Stenosis</th>
+                        <td>{{patient.med_test1_report.t30}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    {% if patient.med_test1_report.t30 != 'Absent' %}
+                    <tr>
+                        <th scope="row">Gradient</th>
+                        <td>Peak Diastolic(mmHg)</td>
+                        <td>Mean Diastolic(mmHg)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t30_1}}</td>
+                        <td>{{patient.med_test1_report.t30_2}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    
+                    {% endif %}
+
+
+                    <tr>
+                        <th scope="row">Tricuspid Regurgitation</th>
+                        <td>{{patient.med_test1_report.t31}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% if patient.med_test1_report.t31 != 'Absent' %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>RVSP(mmHg)=RAP+</td>
+                        <td>TRJV(cm/sec)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t31_1}}</td>
+                        <td>{{patient.med_test1_report.t31_2}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Pulmonary Hypertension</td>
+                        <td>Triscupid Annulus(cm)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t31_3}}</td>
+                        <td>{{patient.med_test1_report.t31_4}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                    
+                    <tr>
+                        <th scope="row">PULMONARY VALVE</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Morphology</th>
+                        <td>{{patient.med_test1_report.t32}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Doppler</th>
+                        <td>{{patient.med_test1_report.t33}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Pulmonary Stenosis</th>
+                        <td>{{patient.med_test1_report.t34}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    {% if patient.med_test1_report.t34 != 'Absent' %}
+                    <tr>
+                        <th scope="row">Gradient</th>
+                        <td>Peak Systolic(mmHg)</td>
+                        <td>Mean Systolic(mmHg)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t34_1}}</td>
+                        <td>{{patient.med_test1_report.t34_2}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <th scope="row">Pulmonary Regurgitation</th>
+                        <td>{{patient.med_test1_report.t35}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    {% if patient.med_test1_report.t35 != 'Absent' %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Early DG(mmHg)</td>
+                        <td>End DG(mmHg)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t35_1}}</td>
+                        <td>{{patient.med_test1_report.t35_2}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+
+                    <tr>
+                        <th scope="row">Pulmonary Artery</th>
+                        <td>{{patient.med_test1_report.t36}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% if patient.med_test1_report.t36 != 'Normal' %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>MPA(mm)</td>
+                        <td>RPA(mm)</td>
+                        <td>LPA(mm)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t36_1}}</td>
+                        <td>{{patient.med_test1_report.t36_2}}</td>
+                        <td>{{patient.med_test1_report.t36_3}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                    
+                    
+
+                    <tr>
+                        <th scope="row">Remarks</th>
+                        <!-- <td>{{patient.med_test1_report.t37|linebreaksbr}}</td> -->
+                        <td>{{patient.med_test1_report.t37|safe}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">IMPRESSION</th>
+                        <td>{{patient.med_test1_report.t38|safe}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Plan</th>
+                        <td>{{patient.med_test1_report.t39|safe}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <th scope="row">
+                            Validated By :
+                        </th>
+                        <td>{{patient.med_test1_report.validated_by}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            
+
+        </div>
+
+
+        {% if patient.med_test1_report and patient.med_test1_report.validated_by %}
+        <div>
+            <form action="{% url 'med_test1_app:generate_pdf_new' %}" method="get">
+                <input type="number" name="id" id="id" hidden value="{{patient.id}}">
+                <button type="submit" class="btn btn-primary" id="generate-pdf">Generate PDF</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="row text-center">
+            <div class="col">
+
+                <form action="{% url 'med_test1_app:validate' %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="id" id="id" hidden value="{{patient.id}}">
+                    <button type="submit" class="btn btn-primary" id="generate-pdf">Validate</button>
+                </form>
+            </div>
+            
+        </div>
+
+        {% endif %}
+        <div class="col">
+
+            <form action="{% url 'med_test1_app:update_med_test1_report' %}" method="get">
+                <input type="number" name="id" id="id" hidden value="{{patient.id}}">
+                <button type="submit" class="btn btn-primary" id="generate-pdf">Update</button>
+            </form>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+
+{% include "include.html" %}
+{% include "navbar.html" %}
+<body>
+    <h1></h1>
+    <form action="{% url 'med_test2_app:Create_1' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1" class="form-control" id="med_test2_1_report" rows=""><p><strong>REPORT:</strong></p><p>&nbsp;</p><p><strong>Liver:</strong> Normal in size and echotexture. No diffuse or focal pathology seen. No e/o dilated IHBR<br>Hepatic veins appear normal.<br><strong>Gall bladder:</strong> Normally distended. Lumen is echofree. No calculus, sludge, wall thickening or pericholecystic fluid.<br><strong>Common bile duct:</strong> Normal caliber and lumen is echoree.<br><strong>Portal vein:</strong> Normal caliber<br><strong>Spleen:</strong> Normal in size and echotexture.<br><strong>Pancreas:</strong> Normal in size and echotexture.<br><strong>Right kidney:</strong> Normal in size and echotexture. Corticomedullary differentiation is maintained.<br>No calculus or hydronephrosis noted.<br><strong>Left kidney:</strong> Normal in size and echotexture. Corticomedullary differentiation is maintained. No calculus or hydronephrosis noted.<br><strong>Urinary Bladder:</strong> Normally distended. No calculus, debris, mass or wall thickening noted.<br><strong>Uterus:</strong> Normal size and echotexture.<br><strong>Adnexae:</strong> Normal. No cyst or collection seen. Ovaries appear normal.</p><p>&nbsp;</p><p>No pelvis mass seen.<br>No free fluid in peritoneal cavity seen.<br>No mesenteric lymphadenopathy seen.<br>No bowel wall thickening noted.<br>IVC and aorta appear normal<br>No pleural effusion at lung bases on either sides.</p><p>&nbsp;</p><p><strong>Impression:</strong><br>Normal USG abdomen study.</p></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#med_test2_1_report'))
+            .catch(error => {
+                console.error(error);
+            });
+        
+    </script>
+</body>

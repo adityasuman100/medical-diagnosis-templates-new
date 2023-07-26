@@ -1,0 +1,23 @@
+{% include "include.html" %}
+{% include "navbar.html" %}
+<div>
+
+    {{patient.med_test2_5_report.t1}}
+</div>
+
+<div>
+    <form action="{% url 'med_test2_app:Pdf_5' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+        <button class="btn btn-success" type="submit">Generate PDF</button>
+        
+    </form>
+</div>
+<div>
+    <form action="{% url 'med_test2_app:Update_5' %}" method="get">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+        <button class="btn btn-success" type="submit">Update</button>
+
+    </form>
+</div>

@@ -1,0 +1,1070 @@
+{% include 'include.html' %}
+{% include 'navbar.html' %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<body>
+    <div class="container">
+
+        {% include 'patient_detail.html' %}
+    </div>
+    <div class="container">
+
+        <form id="myForm3" class="form-horizontal" action="{% url 'med_test1_app:update_med_test1_report' %}"
+            method="post">
+            {% csrf_token %}
+            <input type="number" name="id" hidden value="{{patient.id}}">
+
+            <div align="center">
+                <h1><i><b>Echocardiography</b></i></h1>
+            </div>
+
+
+
+            <div class="form-group mb-2 row m-auto">
+
+                <label for="full_name_id" class="control-label col-sm-2 ss ">MEASUREMENTS</label>
+
+                <div class="col-sm-2 ss">
+                    <label class="control-label ">VALUES</label>
+                </div>
+
+                <div class="col-sm-2 ss">
+                    <label class="control-label ">NORMAL VALUES</label>
+                </div>
+
+                <label for="full_name_id" class="control-label col-sm-2 ss ">MEASUREMENTS</label>
+
+                <div class="col-sm-2 ss">
+                    <label class="control-label ">VALUES</label>
+                </div>
+
+                <div class="col-sm-2 ss">
+                    <label class="control-label ">NORMAL VALUES</label>
+                </div>
+            </div>
+
+            <div class="form-group mb-2 row mt-auto mb-2">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">IVsd</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t1}}" class="form-control" id="t1" name="t1" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (0.6-1.0)cm
+                </div>
+
+                <label for="full_name_id" class="control-label col-sm-2 ss ">IVSs</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t7}}" class="form-control" id="t7" name="t7" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (0.7-1.2)cm
+                </div>
+
+
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">LVIDd</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t3}}" class="form-control" id="t3" name="t3" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (3.6-5.5)cm
+                </div>
+
+                <label for="full_name_id" class="control-label col-sm-2 ss ">LVIDs</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t9}}" class="form-control" id="t9" name="t9" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (2.0-4.0)cm
+                </div>
+
+
+            </div>
+
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">LVPWd</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t5}}" class="form-control" id="t5" name="t5" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (0.6-1.0)cm
+                </div>
+
+                <label for="full_name_id" class="control-label col-sm-2 ss ">LVPWs</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t11}}" class="form-control" id="t11" name="t11" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (0.8-1.2)cm
+                </div>
+
+                
+            </div>
+
+           
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">LVEF</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t13}}" class="form-control" id="t13" name="t13" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (&gt;=50%)
+                </div>
+
+                <label for="full_name_id" class="control-label col-sm-2 ss ">FS</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t12}}" class="form-control" id="t12" name="t12" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (&gt;=25%)
+                </div>
+
+                
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">RWMA</label>
+                <div class="col-sm-10 ss ">
+                    <select style="" class="form-control  custom-select ss collapsible" id="t14" name="t14">
+                        <option selected="" value="Absent"> Absent</option>
+                        <option {% if 'Hypokinesia' in patient.med_test1_report.t14 %} selected {% endif %} value="Hypokinesia">Hypokinesia</option>
+                        <option {% if 'Akinesia' in patient.med_test1_report.t14 %} selected {% endif %} value="Akinesia">Akinesia</option>
+                        <option {% if 'Dyskinesia' in patient.med_test1_report.t14 %} selected {% endif %} value="Dyskinesia">Dyskinesia</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+
+                        <div>
+                            <label for="">BASAL LV</label>
+                            <div class="form-check">
+                                <input name="t14_1" class="form-check-input" type="checkbox" value="Anterior"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Anterior
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_1" class="form-check-input" type="checkbox" value="Anteroseptal"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Anteroseptal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_1" class="form-check-input" type="checkbox" value="Inferior"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Inferior
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_1" class="form-check-input" type="checkbox" value="Inferoseptal"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Inferoseptal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_1" class="form-check-input" type="checkbox" value="Inferolateral"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Inferolateral
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_1" class="form-check-input" type="checkbox" value="Anterolateral"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Anterolateral
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="">MID LV</label>
+                            <div class="form-check">
+                                <input name="t14_2" class="form-check-input" type="checkbox" value="Anterior"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Anterior
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_2" class="form-check-input" type="checkbox" value="Anteroseptal"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Anteroseptal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_2" class="form-check-input" type="checkbox" value="Inferior"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Inferior
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_2" class="form-check-input" type="checkbox" value="Inferoseptal"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Inferoseptal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_2" class="form-check-input" type="checkbox" value="Inferolateral"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Inferolateral
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_2" class="form-check-input" type="checkbox" value="Anterolateral"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Anterolateral
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="">APICAL LV</label>
+                            <div class="form-check">
+                                <input name="t14_3" class="form-check-input" type="checkbox" value="Anterior"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Anterior
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_3" class="form-check-input" type="checkbox" value="Septal"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Septal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_3" class="form-check-input" type="checkbox" value="Inferior"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Inferior
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t14_3" class="form-check-input" type="checkbox" value="Lateral"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Lateral
+                                </label>
+                            </div>
+
+                        </div>
+                        <div>
+                            <label for="">LV APEX</label>
+                            <div class="form-check">
+                                <input name="t14_4" class="form-check-input" type="checkbox" value="Apical Cap"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Apical Cap
+                                </label>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group mb-2 row">
+
+                <label for="full_name_id" class="control-label col-sm-2  ss ">Aorta</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t2}}" class="form-control" id="t2" name="t2" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (2.0-4.0)cm
+                </div>
+
+
+                <label for="full_name_id" class="control-label col-sm-2 ss ">LA</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t4}}" class="form-control" id="t4" name="t4" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (2.0-4.0)cm
+                </div>
+
+
+
+
+            </div>
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">TAPSE</label>
+                <div class="col-sm-2 ss">
+                    <input type="text" value="{{patient.med_test1_report.t10}}" class="form-control" id="t10" name="t10" >
+                </div>
+                <div class="col-sm-2 ss">
+                    (&gt;=1.7)cm
+                </div>
+            </div>
+
+
+
+            <div class="alert alert-dark">
+                <strong>MITRAL VALVE</strong>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Morphology</label>
+                <div class="col-sm-10 ss ">
+                    <select style="" class="form-control  custom-select ss collapsible" id="t15" name="t15">
+                        <option {% if 'Normal' in patient.med_test1_report.t15 %} selected {% endif %} value="Normal"> Normal</option>
+                        <option {% if 'Abnormal' in patient.med_test1_report.t15 %} selected {% endif %} value="Abnormal">Abnormal</option>
+                        <option value="">Select</option>
+                        <option {% if 'Mechanical Prosthetic Valve in Situ' in patient.med_test1_report.t15 %} selected {% endif %} value="Mechanical Prosthetic Valve in Situ">Mechanical Prosthetic Valve in Situ</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+
+                        <div>
+                            <label for="">AML</label>
+                            <div class="form-check">
+                                <input name="t15_1" class="form-check-input" type="checkbox" value="Thickened"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Thickened
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_1" class="form-check-input" type="checkbox" value="Doming"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Doming
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_1" class="form-check-input" type="checkbox" value="Calcified"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Calcified
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_1" class="form-check-input" type="checkbox" value="Prolapse"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Prolapse
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_1" class="form-check-input" type="checkbox" value="Restricted Mobility"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Restricted Mobility
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_1" class="form-check-input" type="checkbox" value="Fixed"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Fixed
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_1" class="form-check-input" type="checkbox" value="Vegetation"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Vegetation
+                                </label>
+                            </div>
+
+                        </div>
+                        <div>
+                            <label for="">PML</label>
+                            <div class="form-check">
+                                <input name="t15_2" class="form-check-input" type="checkbox" value="Thickened"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Thickened
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input name="t15_2" class="form-check-input" type="checkbox" value="Calcified"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Calcified
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_2" class="form-check-input" type="checkbox" value="Prolapse"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Prolapse
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_2" class="form-check-input" type="checkbox" value="Restricted Mobility"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Restricted Mobility
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_2" class="form-check-input" type="checkbox" value="Fixed"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Fixed
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="t15_2" class="form-check-input" type="checkbox" value="Vegetation"
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Vegetation
+                                </label>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Doppler</label>
+                <div class="col-sm-3 ss">
+                    E wave(cm/s)<input type="text" value="{{patient.med_test1_report.t16}}" class="form-control" id="t16" name="t16" >
+                </div>
+                <div class="col-sm-3 ss">
+                    A wave(cm/s)<input type="text" value="{{patient.med_test1_report.t17}}" class="form-control " id="t17" name="t17" >
+                </div>
+                <div class="col-sm-3 ss">
+                    DT<input type="text" value="{{patient.med_test1_report.t18}}" class="form-control " id="t18" name="t18" >
+                </div>
+            </div>
+            <div class="form-group mb-2 row">
+                <!-- #left -->
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Tissue Doppler</label>
+                <div class="col-sm-3 ss">
+                    E"<input type="text" value="{{patient.med_test1_report.t19}}" class="form-control" id="t19" name="t19" >
+                </div>
+                <div class="col-sm-3 ss">
+                    A"<input type="text" value="{{patient.med_test1_report.t20}}" class="form-control " id="t20" name="t20">
+                </div>
+                <div class="col-sm-3 ss">
+                    E/e"<input type="text" value="{{patient.med_test1_report.t21}}" class="form-control " id="t21" name="t21">
+                </div>
+            </div>
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Diastolic Function</label>
+                <div class="col-sm-10 ss ">
+                    <!-- name to be assigned #left -->
+                    <select style="" class="form-control  custom-select ss " id="t22" name="t22">
+                        <option {% if 'Normal' in patient.med_test1_report.t22 %} selected {% endif %} value="Normal"> Normal</option>
+                        <option {% if 'Grade 1 Dysfunction' in patient.med_test1_report.t22 %} selected {% endif %} value="Grade 1 Dysfunction">Grade 1 Dysfunction</option>
+                        <option {% if 'Grade 2 Dysfunction' in patient.med_test1_report.t22 %} selected {% endif %} value="Grade 2 Dysfunction">Grade 2 Dysfunction</option>
+                        <option {% if 'Grade 3 Dysfunction' in patient.med_test1_report.t22 %} selected {% endif %} value="Grade 3 Dysfunction">Grade 3 Dysfunction</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss collapsible">Mitral Stenosis</label>
+                <div class="col-sm-10 ss ">
+                    <!-- name to be assigned #left -->
+                    <select style="" class="form-control  custom-select ss collapsible" id="t23" name="t23">
+                        <option value=""> Select</option>
+                        <option {% if 'Absent' in patient.med_test1_report.t23 %} selected {% endif %} value="Absent">Absent</option>
+                        <option {% if 'Mild' in patient.med_test1_report.t23 %} selected {% endif %} value="Mild">Mild</option>
+                        <option {% if 'Moderate' in patient.med_test1_report.t23 %} selected {% endif %} value="Moderate">Moderate</option>
+                        <option {% if 'Severe' in patient.med_test1_report.t23 %} selected {% endif %} value="Severe">Severe</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="form-group mb-2 row">
+                            <label for="full_name_id" class="control-label col-sm-2 ss ">Gradient</label>
+                            <div class="col-sm-4 ss">
+                                Peak Diastolic<input type="text" value="{{patient.med_test1_report.t23_1}}" class="form-control" id="t23_1" name="t23_1">
+                            </div>
+                            <div class="col-sm-5 ss">
+                                Mean Diastolic(mmHg)<input type="text" value="{{patient.med_test1_report.t23_2}}" class="form-control " id="t22" name="t23_2">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-2 row">
+                            <label for="full_name_id" class="control-label col-sm-2 ss ">MVA</label>
+                            <div class="col-sm-4 ss">
+                                By Planimetry(cmsq)<input type="text" value="{{patient.med_test1_report.t23_3}}" class="form-control" id="t23_3" name="t23_3">
+                            </div>
+                            <div class="col-sm-5 ss">
+                                By PHT(cmsq)<input type="text" value="{{patient.med_test1_report.t23_4}}" class="form-control " id="t23_4" name="t23_4">
+                            </div>
+                        </div>
+                        <div class="form-group mb-2 row">
+                            <label for="full_name_id" class="control-label col-sm-2 ss">Mitral Annulus(cm)</label>
+                            <div class="col ss">
+                                <input type="text" value="{{patient.med_test1_report.t23_5}}" class="form-control " id="t23_5" name="t23_5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss">Mitral Regurgitation</label>
+                <div class="col ss">
+
+                    <div class="ss ">
+                        <select style="" class="form-control  custom-select ss collapsible" id="t24" name="t24">
+                            <option {% if 'Absent' in patient.med_test1_report.t24 %} selected {% endif %} value="Absent"> Absent</option>
+                            <option {% if 'Mild' in patient.med_test1_report.t24 %} selected {% endif %} value="Mild">Mild</option>
+                            <option {% if 'Moderate' in patient.med_test1_report.t24 %} selected {% endif %} value="Moderate">Moderate</option>
+                            <option {% if 'Severe' in patient.med_test1_report.t24 %} selected {% endif %} value="Severe">Severe</option>
+                            <option {% if 'Severe Eccentric' in patient.med_test1_report.t24 %} selected {% endif %} value="Severe Eccentric">Severe Eccentric</option>
+
+                        </select>
+                        <div style="display: none;" class="content">
+                            <div class="form-group mb-2 row">
+                                <!-- <label for="full_name_id" class="control-label col-sm-2 ss "></label> -->
+                                <div class="col ss">
+                                    A4C LA Area(cmsq)<input type="text" value="{{patient.med_test1_report.t24_1}}" class="form-control" id="t24_1" name="t24_1">
+                                </div>
+                                <div class="col ss">
+                                    JetArea(cmsq)<input type="text" value="{{patient.med_test1_report.t24_2}}" class="form-control " id="t24_2" name="t24_2">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="alert alert-dark">
+                <strong>AORTIC VALVE</strong>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Morphology</label>
+                <div class="col-sm-10 ss ">
+                    <select style="" class="form-control  custom-select ss collapsible" id="t25" name="t25">
+                        <option {% if 'Normal' in patient.med_test1_report.t25 %} selected {% endif %} value="Normal"> Normal</option>
+                        <option {% if 'Abnormal' in patient.med_test1_report.t25 %} selected {% endif %} value="Abnormal">Abnormal</option>
+                        <option value="">Select</option>
+                        <option {% if 'Mechanical Prosthetic Valve in Situ' in patient.med_test1_report.t25 %} selected {% endif %} value="Mechanical Prosthetic Valve in Situ">Mechanical Prosthetic Valve in Situ</option>
+
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="form-check">
+                            <input name="t25" class="form-check-input" type="checkbox" value="Thickened"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Thickened
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t25" class="form-check-input" type="checkbox" value="Doming"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Doming
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t25" class="form-check-input" type="checkbox" value="Calcified"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Calcified
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t25" class="form-check-input" type="checkbox" value="Vegetation"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Vegetation
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t25" class="form-check-input" type="checkbox" value="Bicuspid Aortic Valve"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Bicuspid Aortic Valve
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Doppler</label>
+                <div class="col-sm-10 ss">
+                    Aortic peak systolic velocity (cm/sec)<input type="text" value="{{patient.med_test1_report.t26}}" class="form-control" id="t26" name="t26">
+                </div>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss collapsible">Aortic Stenosis</label>
+                <div class="col-sm-10 ss ">
+                    <!-- name to be assigned #left -->
+                    <select style="" class="form-control  custom-select ss collapsible" id="t27" name="t27">
+                        <option value=""> Select</option>
+                        <option {% if 'Absent' in patient.med_test1_report.t27 %} selected {% endif %} value="Absent">Absent</option>
+                        <option {% if 'Mild' in patient.med_test1_report.t27 %} selected {% endif %} value="Mild">Mild</option>
+                        <option {% if 'Moderate' in patient.med_test1_report.t27 %} selected {% endif %} value="Moderate">Moderate</option>
+                        <option {% if 'Severe' in patient.med_test1_report.t27 %} selected {% endif %} value="Severe">Severe</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="form-group mb-2 row">
+                            <label for="full_name_id" class="control-label col-sm-2 ss ">Gradient</label>
+                            <div class="col-sm-4 ss">
+                                Peak Systolic(mmHg)<input type="text" value="{{patient.med_test1_report.t27_1}}" class="form-control" id="t27_1" name="t27_1">
+                            </div>
+                            <div class="col-sm-5 ss">
+                                Mean Systolic(mmHg)<input type="text" value="{{patient.med_test1_report.t27_2}}" class="form-control " id="t27_2" name="t27_2">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-2 row">
+                            <label for="full_name_id" class="control-label col-sm-2 ss ">AVA</label>
+
+                            <div class="col ss">
+                                By Planimetry(cmsq)<input type="text" value="{{patient.med_test1_report.t27_3}}" class="form-control" id="t27_3" name="t27_3">
+                            </div>
+                            <div class="col ss">
+                                Aortic Annulus(cm) <input type="text" value="{{patient.med_test1_report.t27_4}}" class="form-control " id="t27_4" name="t27_4">
+                            </div>
+                        </div>
+                        <div class="form-group mb-2 row">
+                            <label for="full_name_id" class="control-label col-sm-2 ss "></label>
+
+                            <div class="col ss">
+                                Aorta at Sinus (cm)<input type="text" value="{{patient.med_test1_report.t27_5}}" class="form-control" id="t27_5" name="t27_5">
+                            </div>
+                            <div class="col ss">
+                                Ascending Arota at STJ (cm) <input type="text" value="{{patient.med_test1_report.t27_6}}" class="form-control " id="t27_6"
+                                    name="t27_6">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Aortic Regurgitation</label>
+                <div class="col-sm-10 ss">
+
+                    <select style="" class="form-control  custom-select ss collapsible" id="t28" name="t28">
+                        <option {% if 'Absent' in patient.med_test1_report.t28 %} selected {% endif %} value="Absent"> Absent</option>
+                        <option {% if 'Mild' in patient.med_test1_report.t28 %} selected {% endif %} value="Mild">Mild</option>
+                        <option {% if 'Moderate' in patient.med_test1_report.t28 %} selected {% endif %} value="Moderate">Moderate</option>
+                        <option {% if 'Severe' in patient.med_test1_report.t28 %} selected {% endif %} value="Severe">Severe</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="form-group mb-2 row">
+                            <!-- <label for="full_name_id" class="control-label col-sm-2 ss "></label> -->
+                            <div class="col ss">
+                                AR Jet PHT(msec)<input type="text" value="{{patient.med_test1_report.t28_1}}" class="form-control" id="t28_1" name="t28_1">
+                            </div>
+                            <div class="col ss">
+                                AR Vena Contractra(mm)<input type="text" value="{{patient.med_test1_report.t28_2}}" class="form-control " id="t28_2" name="t28_2">
+                            </div>
+                            <!-- <label for="full_name_id" class="control-label col-sm-2 ss "></label> -->
+                            <div class="col ss">
+                                AR Jet(msec)<input type="text" value="{{patient.med_test1_report.t28_3}}" class="form-control " id="t28_3" name="t28_3">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="alert alert-dark">
+                <strong>TRISCUPID VALVE</strong>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Morphology</label>
+                <div class="col-sm-10">
+                    <select style="" class="form-control  custom-select ss collapsible" id="t29" name="t29">
+                        <option {% if 'Normal' in patient.med_test1_report.t29 %} selected {% endif %} value="Normal"> Normal</option>
+                        <option {% if 'Abnormal' in patient.med_test1_report.t29 %} selected {% endif %} value="Abnormal">Abnormal</option>
+                        <option value="">Select</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="form-check">
+                            <input name="t29" class="form-check-input" type="checkbox" value="Thickened"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Thickened
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t29" class="form-check-input" type="checkbox" value="Doming"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Doming
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t29" class="form-check-input" type="checkbox" value="Calcified"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Calcified
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t29" class="form-check-input" type="checkbox" value="Restricted Mobility"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Restricted Mobility
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t29" class="form-check-input" type="checkbox" value="Fixed"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Fixed
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t29" class="form-check-input" type="checkbox" value="Vegetation"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Vegetation
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss collapsible">Triscupid Stenosis</label>
+                <div class="col-sm-10 ss ">
+
+                    <select style="" class="form-control  custom-select ss collapsible" id="t30" name="t30">
+                        <option value=""> Select</option>
+                        <option {% if 'Absent' in patient.med_test1_report.t30 %} selected {% endif %} value="Absent">Absent</option>
+                        <option {% if 'Mild' in patient.med_test1_report.t30 %} selected {% endif %} value="Mild">Mild</option>
+                        <option {% if 'Moderate' in patient.med_test1_report.t30 %} selected {% endif %} value="Moderate">Moderate</option>
+                        <option {% if 'Severe' in patient.med_test1_report.t30 %} selected {% endif %} value="Severe">Severe</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="form-group mb-2 row">
+                            <label for="full_name_id" class="control-label col-sm-2 ss ">Gradient</label>
+                            <div class="col ss">
+                                Peak Diastolic(mmHg)<input type="text" value="{{patient.med_test1_report.t30_1}}" class="form-control" id="t38" name="t30_1">
+                            </div>
+                            <div class="col ss">
+                                Mean Diastolic(mmHg)<input type="text" value="{{patient.med_test1_report.t30_2}}" class="form-control " id="t39" name="t30_2">
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Triscupid Regurgitation</label>
+                <div class="col-sm-10 ss">
+
+
+                    <select style="" class="form-control  custom-select ss collapsible" id="t31" name="t31">
+                        <option {% if 'Absent' in patient.med_test1_report.t31 %} selected {% endif %} value="Absent"> Absent</option>
+                        <option {% if 'Mild' in patient.med_test1_report.t31 %} selected {% endif %} value="Mild">Mild</option>
+                        <option {% if 'Moderate' in patient.med_test1_report.t31 %} selected {% endif %} value="Moderate">Moderate</option>
+                        <option {% if 'Severe' in patient.med_test1_report.t31 %} selected {% endif %} value="Severe">Severe</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="row">
+                            <div class="col ss">
+                                RVSP(mmHg)=RAP+<input type="text" value="{{patient.med_test1_report.t31_1}}" class="form-control" id="t31_1" name="t31_1">
+                            </div>
+                            <div class="col ss">
+                                TRJV(cm/sec)<input type="text" value="{{patient.med_test1_report.t31_2}}" class="form-control " id="t31_2" name="t31_2">
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col ss">
+                                <!-- Pulmonary Hypertension<input type="text" value="{{patient.med_test1_report.t1}}" class="form-control" id="t42" name="t42"> -->
+                                Pulmonary Hypertension
+                                <div class="">
+                                    <select style="" class="form-control  custom-select ss " id="t31_3" name="t31_3">
+                                        <option {% if 'None' in patient.med_test1_report.t31_3 %} selected {% endif %} value="None"> None</option>
+                                        <option {% if 'Mild' in patient.med_test1_report.t31_3 %} selected {% endif %} value="Mild">Mild</option>
+                                        <option {% if 'Moderate' in patient.med_test1_report.t31_3 %} selected {% endif %} value="Moderate">Moderate</option>
+                                        <option {% if 'Severe' in patient.med_test1_report.t31_3 %} selected {% endif %} value="Severe">Severe</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col ss">
+                                Triscupid Annulus(cm)<input type="text" value="{{patient.med_test1_report.t31_4}}" class="form-control " id="t31_4" name="t31_4">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group mb-2 row">
+                    <label for="full_name_id" class="control-label col-sm-2 ss "></label>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="alert alert-dark">
+                <strong>PULMONARY VALVE</strong>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Morphology</label>
+                <div class="col-sm-10">
+                    <select style="" class="form-control  custom-select ss collapsible" id="t32" name="t32">
+                        <option {% if 'Normal' in patient.med_test1_report.t32 %} selected {% endif %} value="Normal"> Normal</option>
+                        <option {% if 'Abnormal' in patient.med_test1_report.t32 %} selected {% endif %} value="Abnormal">Abnormal</option>
+                        <option value="">Select</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="form-check">
+                            <input name="t32" class="form-check-input" type="checkbox" value="Thickened"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Thickened
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t32" class="form-check-input" type="checkbox" value="Atresia"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Atresia
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t32" class="form-check-input" type="checkbox" value="Calcified"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Calcified
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="t32" class="form-check-input" type="checkbox" value="Vegetation"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Vegetation
+                            </label>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Doppler</label>
+                <div class="col-sm-10 ss">
+                    Peak Systolic Velocity (cm/sec)<input type="text" value="{{patient.med_test1_report.t33}}" class="form-control" id="t33" name="t33">
+                </div>
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss collapsible">Pulmonary Stenosis</label>
+                <div class="col-sm-10 ss ">
+                    <!-- name to be assigned #left -->
+                    <select style="" class="form-control  custom-select ss collapsible" id="t34" name="t34">
+                        <option value=""> Select</option>
+                        <option {% if 'Absent' in patient.med_test1_report.t34 %} selected {% endif %} value="Absent">Absent</option>
+                        <option {% if 'Mild' in patient.med_test1_report.t34 %} selected {% endif %} value="Mild">Mild</option>
+                        <option {% if 'Moderate' in patient.med_test1_report.t34 %} selected {% endif %} value="Moderate">Moderate</option>
+                        <option {% if 'Severe' in patient.med_test1_report.t34 %} selected {% endif %} value="Severe">Severe</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+
+                        <div class="form-group mb-2 row">
+                            <label for="full_name_id" class="control-label col-sm-2 ss ">Gradient</label>
+                            <div class="col-sm-4 ss">
+                                Peak Systolic(mmHg)<input type="text" value="{{patient.med_test1_report.t34_1}}" class="form-control" id="t34_1" name="t34_1">
+                            </div>
+                            <div class="col-sm-5 ss">
+                                Mean Systolic(mmHg)<input type="text" value="{{patient.med_test1_report.t34_2}}" class="form-control " id="t34_2" name="t34_2">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Pulmonary Regurgitation</label>
+                <div class="col-sm-10 ss">
+
+                    <select style="" class="form-control  custom-select ss collapsible" id="t35" name="t35">
+                        <option {% if 'Absent' in patient.med_test1_report.t35 %} selected {% endif %} value="Absent"> Absent</option>
+                        <option {% if 'Mild' in patient.med_test1_report.t35 %} selected {% endif %} value="Mild">Mild</option>
+                        <option {% if 'Moderate' in patient.med_test1_report.t35 %} selected {% endif %} value="Moderate">Moderate</option>
+                        <option {% if 'Severe' in patient.med_test1_report.t35 %} selected {% endif %} value="Severe">Severe</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="row">
+                            <div class="col ss">
+                                Early DG(mmHg)<input type="text" value="{{patient.med_test1_report.t35_1}}" class="form-control" id="t35_1" name="t35_1">
+                            </div>
+                            <div class="col ss">
+                                End DG(mmHg)<input type="text" value="{{patient.med_test1_report.t35_2}}" class="form-control " id="t35_2" name="t35_2">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Pulmonary Artery</label>
+                <div class="col-sm-10 ss">
+
+                    <select style="" class="form-control  custom-select ss collapsible" id="t36" name="t36">
+                        <option {% if 'Normal' in patient.med_test1_report.t36 %} selected {% endif %} value="Normal"> Normal</option>
+                        <option value="">select</option>
+                        <option {% if 'Dilated' in patient.med_test1_report.t36 %} selected {% endif %} value="Dilated">Dilated</option>
+                        <option {% if 'Small' in patient.med_test1_report.t36 %} selected {% endif %} value="Small">Small</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="row">
+                            <div class="col ss">
+                                MPA(mm)<input type="text" value="{{patient.med_test1_report.t36_1}}" class="form-control" id="t36_1" name="t36_1">
+                            </div>
+                            <div class="col ss">
+                                RPA(mm)<input type="text" value="{{patient.med_test1_report.t36_2}}" class="form-control " id="t36_2" name="t36_2">
+                            </div>
+                            <div class="col ss">
+                                LPA(mm)<input type="text" value="{{patient.med_test1_report.t36_3}}" class="form-control " id="t36_3" name="t36_3">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss"><strong>Remarks</strong></label>
+                <div class="form-outline col">
+                    <textarea name="t37" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                    <!-- <label class="form-label" for="textAreaExample">Remarks</label> -->
+                </div>
+            </div>
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss"><strong>IMPRESSION</strong></label>
+                <div class="form-outline col">
+                    <textarea name="t38" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                    <!-- <label class="form-label" for="textAreaExample">IMPRESSION</label> -->
+                </div>
+            </div>
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss"><strong>PLAN</strong></label>
+                <div class="form-outline col">
+                    <textarea name="t39" class="form-control" id="textAreaExample1" rows="4"></textarea>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            
+
+
+            <div class="form-group mb-2"> 
+                <div align="center">
+                    <button style="width:200" type="submit" class="btn btn-primary" id="gg">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#cke_t55'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#cke_t56'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#cke_t57'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+
+
+    <script>
+        function handleInputChange(event) {
+            const targetElement = event.target;
+            var content = targetElement.nextElementSibling;
+            // if (content.style.display === "block") 
+            if (targetElement.value === "Normal" || targetElement.value === "Absent" || targetElement.value === 'Mechanical Prosthetic Valve in Situ') {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+
+        const collapsibleInputs = document.querySelectorAll('.collapsible');
+        collapsibleInputs.forEach(function (input) {
+            input.addEventListener('input', handleInputChange);
+        });
+    </script>
+
+</body>

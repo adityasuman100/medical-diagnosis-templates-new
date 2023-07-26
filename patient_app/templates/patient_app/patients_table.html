@@ -1,0 +1,40 @@
+
+<div class="container bg-secondary-subtle p-4">
+    <table class="table table-secondary">
+      <div class="md-2">
+          <form id="date_form" action="{{ request.build_absolute_uri }}" method="get" class="d-flex" role="search">
+              <input id="date_input" class="" type="date" onchange="this.form.submit()" name="date">
+          </form>
+      </div>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Gender</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in patients %}
+                
+                <tr class="">
+                    <th scope="row">{{p.id}}</th>
+                    <td>{{p.name}}</td>
+                    <td>{{p.age}}</td>
+                    <td>{{p.gender}}</td>
+                    <td>
+                        <form action="{% url 'patient_app:read_patient' %}" method="get">
+                            <input type="number" name="id" value="{{p.id}}" hidden>
+                            <button class="btn btn-success" type="submit">Billing</button>
+                        </form>
+                    </td>
+                
+                </tr>
+                
+                
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,28 @@
+{% include 'include.html' %}
+
+<div class="container">
+  {% for const in constants %}
+
+  <form action="{% url 'user_app:constant' %}" method="post">
+    {% csrf_token %}
+    <div class=" mb-3">
+      <label for="exampleInputEmail1" class="form-label">
+        {% if const.name == 'med_test1_amount' %} Echo {% endif %}
+        
+      </label>
+      <input
+        name="{{const.name}}"
+        value="{{const.value}}"
+        type="number"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {% endfor %}
+</div>
+
+{% include 'footer.html' %}

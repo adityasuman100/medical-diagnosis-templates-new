@@ -1,0 +1,94 @@
+<div class="container border">
+    <form action="{% url 'patient_app:update_patient' %}" method="post">
+        {% csrf_token %}
+        <input type="number" value="{{patient.id}}" name="id" hidden>
+
+        {{patient.med_test1}}
+
+        <div class="form-check">
+            <div>
+
+                <input {% if patient.med_test1 %} disabled checked {% endif %} name="med_test1" class="form-check-input" type="checkbox"
+                    value="True" id="">
+                <label class="form-check-label" for="flexCheckDefault">
+                   {% if patient.med_test1 %}
+                       Done for Echocardiography
+                   {% else %}
+                       Echocardiography
+                   {% endif %}
+                </label>
+            </div>
+
+            <div>
+
+                <input {% if patient.med_test2_1 %} disabled checked {% endif %} name="med_test2_1" class="form-check-input" type="checkbox"
+                    value="True" id="">
+                <label class="form-check-label" for="flexCheckDefault">
+                   {% if patient.med_test2_1 %}
+                       Done for USG ABDOMEN
+                   {% else %}
+                   USG ABDOMEN
+                   {% endif %}
+                </label>
+            </div>
+
+            <div>
+
+                <input {% if patient.med_test2_2 %} disabled checked {% endif %} name="med_test2_2" class="form-check-input" type="checkbox"
+                    value="True" id="">
+                <label class="form-check-label" for="flexCheckDefault">
+                   {% if patient.med_test2_2 %}
+                       Done for USG BREAST
+                   {% else %}
+                   USG BREAST
+                   {% endif %}
+                </label>
+            </div>
+
+            <div>
+
+                <input {% if patient.med_test2_3 %} disabled checked {% endif %} name="med_test2_3" class="form-check-input" type="checkbox"
+                    value="True" id="">
+                <label class="form-check-label" for="flexCheckDefault">
+                   {% if patient.med_test2_3 %}
+                       Done for USG PELVIS
+                   {% else %}
+                   USG PELVIS
+                   {% endif %}
+                </label>
+            </div>
+
+            <div>
+
+                <input {% if patient.med_test2_4 %} disabled checked {% endif %} name="med_test2_4" class="form-check-input" type="checkbox"
+                    value="True" id="">
+                <label class="form-check-label" for="flexCheckDefault">
+                   {% if patient.med_test2_4 %}
+                       Done for USG KUB
+                   {% else %}
+                   USG KUB
+                   {% endif %}
+                </label>
+            </div>
+
+            <div>
+
+                <input {% if patient.med_test2_5 %} disabled checked {% endif %} name="med_test2_5" class="form-check-input" type="checkbox"
+                    value="True" id="">
+                <label class="form-check-label" for="flexCheckDefault">
+                   {% if patient.med_test2_5 %}
+                       Done for DOPPLER LOWER LIMB
+                   {% else %}
+                   DOPPLER LOWER LIMB
+                   {% endif %}
+                </label>
+            </div>
+
+        </div>
+
+        
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>

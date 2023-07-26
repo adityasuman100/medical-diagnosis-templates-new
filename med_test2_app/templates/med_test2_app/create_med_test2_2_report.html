@@ -1,0 +1,25 @@
+{% include "include.html" %}
+{% include "navbar.html" %}
+<body>
+    <form action="{% url 'med_test2_app:Create_2' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1" class="form-control" id="med_test2_1_report" rows=""><p><strong>REPORT:</strong><br>&nbsp;</p><p><strong>RT BREAST:</strong><br>&nbsp;</p><p><strong>Fibroglandular tissue-</strong> normal<br><strong>Nipple areolar complex and retroareloar tissue-</strong> normal<br><strong>Fatty tissue-</strong> normal<br><strong>Retromammary area-</strong> normal<br><strong>RT AXILLA:</strong> Normal; no evidence of lymphademopathy<br><strong>LT BREAST:</strong><br><strong>Fibroglandular tissue-</strong> normal<br><strong>Nipple areolar complex and retroareloar tissue-</strong>normal<br><strong>Fatty tissue-</strong> normal<br><strong>Retromammary area-</strong> normal<br><strong>LT AXILLA:</strong> Normal; no evidence of lymphadenopathy<br>&nbsp;</p><p><strong>IMPRESSION:-</strong><br>&nbsp;</p></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    
+    
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#med_test2_1_report'))
+            .catch(error => {
+                console.error(error);
+            });
+        
+    </script>
+</body>

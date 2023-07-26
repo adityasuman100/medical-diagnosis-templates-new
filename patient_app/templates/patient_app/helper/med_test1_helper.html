@@ -1,0 +1,28 @@
+{% if data.med_test1 %}
+    {% if patient.med_test1_report and patient.med_test1_report.validated_by %}
+    <form action="{% url 'med_test1_app:read_med_test1_report' %}" method="get">
+        <input type="number" value="{{patient.id}}" name="id" hidden>
+        <button type="submit">Read</button>
+    </form>
+    <form action="{% url 'med_test1_app:update_med_test1_report' %}" method="get">
+        <input type="number" value="{{patient.id}}" name="id" hidden>
+        <button type="submit">Update</button>
+    </form>
+    
+    {% elif patient.med_test1_report %}
+        <form action="{% url 'med_test1_app:read_med_test1_report' %}" method="get">
+            <input type="number" value="{{patient.id}}" name="id" hidden>
+            <button class="btn btn-primary mx-2" type="submit">Validate</button>
+        </form>
+    {%else%}
+        <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="get">
+            <input type="number" value="{{patient.id}}" name="id" hidden>
+            <button class="btn btn-primary mx-2" type="submit">Create</button>
+        </form>
+    {% endif %}
+
+{% else %}
+
+first do payment
+
+{% endif %}

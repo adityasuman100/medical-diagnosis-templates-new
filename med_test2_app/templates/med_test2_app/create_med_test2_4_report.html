@@ -1,0 +1,26 @@
+{% include "include.html" %}
+{% include "navbar.html" %}
+<body>
+    <form action="{% url 'med_test2_app:Create_4' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1" class="form-control" id="med_test2_1_report" rows=""><p><strong>REPORT:</strong></p><p><br><strong>Right kidney:</strong> Normal in size and echotexture. Corticomedullary differentiation is maintained.<br>No calculus or hydronephrosis noted.<br>&nbsp;</p><p><strong>Left kidney:</strong> Normal in size and echotexture. Corticomedullary differentiation is maintained. No calculus or hydronephrosis noted.<br>&nbsp;</p><p><strong>Urinary Bladder:</strong> Normally distended. No calculus, debris, mass or wall thickening noted.<br>&nbsp;</p><p><strong>Prostate/ Uterus:</strong> Normal size and echotexture.<br>No pelvis mass seen.<br>&nbsp;</p><p><strong>Impression:</strong></p><p>&nbsp;</p></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+
+    
+    
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#med_test2_1_report'))
+            .catch(error => {
+                console.error(error);
+            });
+        
+    </script>
+</body>
