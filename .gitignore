@@ -3,3 +3,8 @@ db.sqlite3
 
 static/css
 static/js
+med_diag/__pycache__
+med_test1_app/__pycache__
+med_test2_app/__pycache__
+patient_app/__pycache__
+user_app/__pycache__
