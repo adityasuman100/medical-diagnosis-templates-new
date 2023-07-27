@@ -1,0 +1,11 @@
+<div>
+    <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1_1" class="form-control" id="t1_6" rows=""><p><strong>Remarks:</strong></p><p>&nbsp;</p><p>SITUS SOLITUS<br>LEVOCARDIA<br>TWO WELL DEVELOPED ATRIA PRESENT<br>TWO WELL DEVELOPED VENTRICLES PRESENT<br>ALL FOUR PULMONARY VEINS DRAINING INTO LA<br>IVC/SVC DRANING INTO RA<br>NRGA<br>AV-VA CONCORDANCE<br>MORPHOLOGICALLY NORMAL VALVES<br>IAS INTACT<br>LARGE INFUNDIBULAR VSD WITH BIDIRECTIONAL SHUNT<br>OVER-RIDING OF AORTA PRESENT<br>SEVERE VALVULAR PS WITH RVOT PEAK GRADIENT- mmHg<br>MPA- 1.2cm, RPA- 0.8cm, LPA- 1.0cm<br>RIGHT VENTRICULAR HYPERTROPHY<br>NORMAL BIVENTRICULAR SYSTOLIC FUNCTION<br>NO PDA / NO COARCTATION OF AORTA<br>MULTIPLE MAPCAS SEEN<br>BOTH CORONARY ARTERIES ARISING FROM THEIR RESPECTIVE SINUSES<br>NO PERICARDIAL EFFUSION / VEGETATION</p><p>&nbsp;</p><p><strong>Impression:</strong></p><p>&nbsp;</p><p>CYANOTIC CONGENITAL HEART DISEASE&nbsp;<br>TOF<br>&nbsp;</p></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,225 @@
+{% include "include.html" %}
+{% include "navbar.html" %}
+
+
+<body>
+    
+    <div class="container">
+    
+    </div>
+    
+    <div>
+        <div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment-tab-pane"
+                        type="button" role="tab" aria-controls="payment-tab-pane" aria-selected="true">Echo Template</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_1-tab" data-bs-toggle="tab" data-bs-target="#t1_1-tab-pane"
+                        type="button" role="tab" aria-controls="t1_1-tab-pane" aria-selected="false">Normal Study</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_2-tab" data-bs-toggle="tab" data-bs-target="#t1_2-tab-pane"
+                        type="button" role="tab" aria-controls="t1_2-tab-pane" aria-selected="false">ASD</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_3-tab" data-bs-toggle="tab" data-bs-target="#t1_3-tab-pane"
+                        type="button" role="tab" aria-controls="t1_3-tab-pane" aria-selected="false">VSD</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_4-tab" data-bs-toggle="tab" data-bs-target="#t1_4-tab-pane"
+                        type="button" role="tab" aria-controls="t1_4-tab-pane" aria-selected="false">PDA</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_5-tab" data-bs-toggle="tab" data-bs-target="#t1_5-tab-pane"
+                        type="button" role="tab" aria-controls="t1_5-tab-pane" aria-selected="false">PS</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_6-tab" data-bs-toggle="tab" data-bs-target="#t1_6-tab-pane"
+                        type="button" role="tab" aria-controls="t1_6-tab-pane" aria-selected="false">TOF</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_7-tab" data-bs-toggle="tab" data-bs-target="#t1_7-tab-pane"
+                        type="button" role="tab" aria-controls="t1_7-tab-pane" aria-selected="false">DEXTROCARDIA</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_8-tab" data-bs-toggle="tab" data-bs-target="#t1_8-tab-pane"
+                        type="button" role="tab" aria-controls="t1_8-tab-pane" aria-selected="false">AVSD</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_9-tab" data-bs-toggle="tab" data-bs-target="#t1_9-tab-pane"
+                        type="button" role="tab" aria-controls="t1_9-tab-pane" aria-selected="false">C-TGA</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_10-tab" data-bs-toggle="tab" data-bs-target="#t1_10-tab-pane"
+                        type="button" role="tab" aria-controls="t1_10-tab-pane" aria-selected="false">EBSTEIN ANOMALY</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="t1_11-tab" data-bs-toggle="tab" data-bs-target="#t1_11-tab-pane"
+                        type="button" role="tab" aria-controls="t1_11-tab-pane" aria-selected="false">t1_11</button>
+                </li>
+    
+            </ul>
+    
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="payment-tab-pane" role="tabpanel" aria-labelledby="payment-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/create_med_test1_report.html' %}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="t1_1-tab-pane" role="tabpanel" aria-labelledby="t1_1-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_1.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_2-tab-pane" role="tabpanel" aria-labelledby="t1_2-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_2.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_3-tab-pane" role="tabpanel" aria-labelledby="t1_3-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_3.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_4-tab-pane" role="tabpanel" aria-labelledby="t1_4-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_4.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_5-tab-pane" role="tabpanel" aria-labelledby="t1_5-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_5.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_6-tab-pane" role="tabpanel" aria-labelledby="t1_6-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_6.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_7-tab-pane" role="tabpanel" aria-labelledby="t1_7-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_7.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_8-tab-pane" role="tabpanel" aria-labelledby="t1_8-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_8.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_9-tab-pane" role="tabpanel" aria-labelledby="t1_9-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_9.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_10-tab-pane" role="tabpanel" aria-labelledby="t1_10-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_10.html' %}
+    
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="t1_11-tab-pane" role="tabpanel" aria-labelledby="t1_11-tab"
+                    tabindex="0">
+                    <div class="container">
+                        {% include 'med_test1_app/helper/t1_11.html' %}
+    
+                    </div>
+    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#t1_1'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_2'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_3'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_4'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_5'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_6'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_7'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_8'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_9'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_10'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+        .create(document.querySelector('#t1_11'))
+            .catch(error => {
+                console.error(error);
+            });
+        
+    </script>
+</body>

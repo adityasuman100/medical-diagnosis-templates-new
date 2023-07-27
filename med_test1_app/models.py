@@ -18,6 +18,8 @@ class Med_test1_report(models.Model):
     validated_by=models.CharField(max_length=200, null=True)
     created_date=models.DateField(default=timezone.now)
     lab_no=models.IntegerField(null=True)
+
+    t1_1=models.TextField(null=True)
     
     t1=models.CharField(max_length=200, null=True)
     t2=models.CharField(max_length=200, null=True)
@@ -97,7 +99,6 @@ class Med_test1_report(models.Model):
     # t39=models.CharField(max_length=200, null=True)
     t39=models.TextField(null=True)
     
-
 
 
 # class Echo_payment(models.Model):

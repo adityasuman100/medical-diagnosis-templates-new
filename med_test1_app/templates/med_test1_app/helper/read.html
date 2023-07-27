@@ -1,0 +1,36 @@
+{% include "include.html" %}
+{% include "navbar.html" %}
+
+<div class="container">
+    {{patient.med_test1_report.t1_1|safe}}
+</div>
+<div class="container">
+    {% if patient.med_test1_report and patient.med_test1_report.validated_by %}
+        <div>
+            <form action="{% url 'med_test1_app:generate_pdf_new' %}" method="get">
+                <input type="number" name="id" id="id" hidden value="{{patient.id}}">
+                <button type="submit" class="btn btn-primary" id="generate-pdf">Generate PDF</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="row text-center">
+            <div class="col">
+
+                <form action="{% url 'med_test1_app:validate' %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="id" id="id" hidden value="{{patient.id}}">
+                    <button type="submit" class="btn btn-primary" id="generate-pdf">Validate</button>
+                </form>
+            </div>
+            
+        </div>
+
+        {% endif %}
+        <div class="col">
+
+            <form action="{% url 'med_test1_app:update_med_test1_report' %}" method="get">
+                <input type="number" name="id" id="id" hidden value="{{patient.id}}">
+                <button type="submit" class="btn btn-primary" id="generate-pdf">Update</button>
+            </form>
+        </div>
+</div>

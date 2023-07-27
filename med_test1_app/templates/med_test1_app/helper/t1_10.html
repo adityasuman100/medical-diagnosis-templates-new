@@ -1,0 +1,11 @@
+<div>
+    <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1_1" class="form-control" id="t1_10" rows=""><p><strong>Remarks:</strong></p><p>&nbsp;</p><p>SITUS SOLITUS<br>LEVOCARDIA<br>ALL FOUR PULMONARY VEINS DRAINING INTO LA<br>IVC/SVC DRAINING INTO RA<br>NRGA&nbsp;<br>AV-VA CONCORDANCE<br>APICAL DISPLACEMENT OF TRICUSPID VALVE, DISTANCE BETWEEN ATL AND AML ATTACHMENT IS 26mm. (RA + ATRIALISED RV- 54 cmsq, RV- 24 cmsq, LA- 11.4 cmsq, LV- 19.7 cmsq, ATRIALISED RV- 29 cmsq)<br>21 mm OSTIUM SECUNDUM ASD WITH BIDIRECTIONAL SHUNT&nbsp;<br>MPA- 15.2 mm, RPA- 8.8mm LPA- 9.3mm<br>SEVERE LOW PRESSURE TR (TRJV- 205 cm/sec, RVSP- 14mmHg)<br>IVS INTACT<br>NO PDA / COARCTATION OF OF AORTA<br>&nbsp;</p><p><strong>Impression:</strong></p><p>&nbsp;</p><p>CONGENITAL CYANOTIC HEART DISEASE<br>EBSTEIN’S ANOMALY WITH OSTIUM SECUNDUM ASD WITH BIDIRECTIONAL SHUNT&nbsp;</p></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+</div>

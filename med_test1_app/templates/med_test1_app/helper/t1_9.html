@@ -1,0 +1,11 @@
+<div>
+    <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1_1" class="form-control" id="t1_9" rows=""><p><strong>Remarks:</strong></p><p>&nbsp;</p><p>SITUS SOLITUS<br>LEVOCARDIA<br>TWO WELL DEVELOPED ATRIA PRESENT<br>TWO WELL DEVELOPED VENTRICLES PRESENT<br>MORPHOLOGICAL RV ON THE LEFT OF MORPHOLOGICAL LV<br>AORTA LEFT AND ANTERIOR TO PA<br>ALL FOUR PULMONARY VEINS DRAINING INTO LA<br>IVC/SVC DRAINING INTO RA<br>AV DISCORDANCE&nbsp;<br>VA DISCORDANCE<br>PFO PRESENT<br>RESTRICTIVE VENTRICULAR SEPTAL DEFECT DRAINING INTO RA (GERBODE DEFECT) WITH GRADIENT 64 mmHg<br>MODERATE INFUNDIBULAR + VALVULAR PS (RVOT GRADIENT- 64mmHg)<br>NORMAL BIVENTRICULAR SYSTOLIC FUNCTION<br>NO PDA, NO COARCTATION OF AORTA<br>NO PERICARDIAL EFFUSION / VEGETATION</p><p>&nbsp;</p><p><strong>Impression:</strong></p><p>&nbsp;</p><p>CORRECTED TRANSPOSITION WITH GERBODE DEFECT WITH VALVULAR + INFUNDIBULAR PS</p></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+</div>

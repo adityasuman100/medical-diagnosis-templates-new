@@ -1,0 +1,11 @@
+<div>
+    <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1_1" class="form-control" id="t1_11" rows=""></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+</div>

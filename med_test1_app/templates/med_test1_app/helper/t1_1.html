@@ -1,0 +1,11 @@
+<div>
+    <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" id="id" value="{{patient.id}}" hidden>
+
+        <div class="container mt-4 mb-4">
+            <textarea name="t1_1" class="form-control" id="t1_1" rows=""><p><strong>Remarks:</strong></p><p>&nbsp;</p><p>SITUS SOLITUS<br>LEVOCARDIA<br>ALL FOUR PULMONARY VEINS DRAINING INTO LA</p><p>IVC/SVC DRAINING INTO RA<br>NRGA&nbsp;</p><p>AV-VA CONCORDANCE<br>MORPHOLOGICALLY NORMAL VALVES<br>INTACT IAS &amp; IVS<br>NORMAL BIVENTRICULAR SYSTOLIC FUNCTION</p><p>NO PDA / COARCTATION OF AORTA<br>NO PERICARDIAL EFFUSION / VEGETATION</p><p>&nbsp;</p><p><strong>Impression:</strong></p><p>NORMAL STUDY.</p></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+</div>

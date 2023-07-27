@@ -60,10 +60,13 @@ def create_med_test1_report(request):
         if p.med_test1_report:
             messages.error(request, 'report already existed please update or take print')
             return redirect(reverse('patient_app:read_patient')+f'?id={id}')
-        return render(request, 'med_test1_app/create_med_test1_report.html', {'patient':p})
+        return render(request, 'med_test1_app/create.html', {'patient':p})
+        # return render(request, 'med_test1_app/create_med_test1_report.html', {'patient':p})
 
 
     elif request.method=='POST':
+
+        # return render(request, 'med_test1_app/helper/read.html', {'t1_1':request.POST.get('t1_1', None)})
         # create echo report with id
         form_data=request.POST
         # print(form_data)
@@ -79,10 +82,14 @@ def create_med_test1_report(request):
             messages.error(request, 'report already existed please update or take print')
             return redirect(reverse('patient_app:read_patient')+f'?id={id}')
         
+
+        
         latest_id=Med_test1_report.objects.latest('id')
         echo=Med_test1_report()
         echo.lab_no=latest_id.id+1
         # echo.validated_by=request.user.username
+
+        echo.t1_1=form_data.get('t1_1', None)
 
         echo.t1=form_data.get('t1', None)
         echo.t2=form_data.get('t2', None)
@@ -196,9 +203,9 @@ def create_med_test1_report(request):
         echo.t36_2=form_data.get('t36_2', None)
         echo.t36_3=form_data.get('t36_3', None)
 
-        echo.t37=form_data.get('t37', None)
-        echo.t38=form_data.get('t38', None)
-        echo.t39=form_data.get('t39', None)
+        echo.t37=form_data.get('t37', "")
+        echo.t38=form_data.get('t38', "")
+        echo.t39=form_data.get('t39', "")
 
         echo.save()
         p.med_test1_report=echo
@@ -225,6 +232,8 @@ def read_med_test1_report(request):
             return redirect(reverse('patient_app:create_patient'))
         if p.med_test1_report:
             # print(p.med_test1_report.t37)
+            if p.med_test1_report.t1_1:
+                return render(request, 'med_test1_app/helper/read.html', {'patient':p})
             return render(request, 'med_test1_app/read_med_test1_report.html', {'patient':p})
         else:
             messages.error(request, 'report does not found')
@@ -246,6 +255,8 @@ def update_med_test1_report(request):
             messages.error(request, 'patient not found')
             return redirect(reverse('patient_app:create_patient'))
         if p.med_test1_report:
+            if p.med_test1_report.t1_1:
+                return render(request, 'med_test1_app/helper/update.html', {'patient':p})
             return render(request, 'med_test1_app/update_med_test1_report.html', {'patient':p})
         else:
             messages.error(request, 'report does not found please create first')
@@ -273,6 +284,8 @@ def update_med_test1_report(request):
         echo=p.med_test1_report
         # echo.lab_no=latest_id.id+1
         # echo.validated_by=request.user.username
+
+        echo.t1_1=form_data.get('t1_1', None)
 
         echo.t1=form_data.get('t1', None)
         echo.t2=form_data.get('t2', None)
@@ -505,11 +518,14 @@ def generate_pdf_new(request):
     if not p.med_test1_report:
         messages.error(request, 'report does not exist')
         return redirect(reverse('patient_app:print_report'))
+    
+    r=p.med_test1_report
+
+
     buffer = BytesIO()
 
     doc = SimpleDocTemplate(buffer, pagesize=A4, leftMargin=50, rightMargin=50)
 
-    r=p.med_test1_report
 
     # header image
     # # Get the relative path to the image within the static folder
@@ -597,6 +613,13 @@ def generate_pdf_new(request):
 
     t=Table(data, colWidths=[doc.width / 6.0] * 6)
     t.setStyle(style)
+
+    heading_text = "Echocardiography"
+    heading_style = getSampleStyleSheet()["Heading2"]
+    heading_style.alignment = 1  # Set alignment to center
+
+    # Create a Paragraph object for the heading
+    heading = Paragraph(heading_text, style=heading_style)
 
 
 
@@ -857,7 +880,10 @@ def generate_pdf_new(request):
 
 
     # Build the document with the table
-    elements = [table, Spacer(1, 12), t, t5, heading1, t1, heading2, t2, heading3, t3, heading4, t4, para1, para2, para3]
+    elements=[]
+    elements = [table, Spacer(1, 12), t, heading, Spacer(1, 12), t5, heading1, t1, heading2, t2, heading3, t3, heading4, t4, para1, para2, para3]
+    if r.t1_1:
+        elements=[table, Spacer(1, 15), t, heading, Spacer(1, 12), Paragraph(r.t1_1.replace('<br>', '<br/>').replace('<p>&nbsp;</p>', '<br/>').replace('</p>', '</p><br/>'))]
     doc.build(elements)
 
     # File buffer is now at position 0, so we can "rewind" it.
@@ -891,3 +917,5 @@ def test(request):
 #         else:
 #             new_html += html_content[i]
 #     return new_html
+
+
