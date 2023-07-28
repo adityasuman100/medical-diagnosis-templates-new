@@ -3,7 +3,12 @@
 
 <h1>update</h1>
 
+
 <body>
+    <div class="container">
+
+        {% include 'patient_detail.html' %}
+    </div>
     
     <div>
         <form action="{% url 'med_test1_app:update_med_test1_report' %}" method="post">

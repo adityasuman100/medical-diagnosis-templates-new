@@ -642,6 +642,32 @@
                         <td></td>
                     </tr>
                     {% endif %}
+                    <tr>
+                        <th scope="row">Pericardial Effusion</th>
+                        <td>{{patient.med_test1_report.t40}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% if patient.med_test1_report.t40 != 'Absent' %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Anterior to RV(mm)</td>
+                        <td>Posterior to LV(mm)</td>
+                        <td>Lateral(mm)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{patient.med_test1_report.t40_1}}</td>
+                        <td>{{patient.med_test1_report.t40_2}}</td>
+                        <td>{{patient.med_test1_report.t40_3}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
                     
                     
 

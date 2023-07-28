@@ -1,4 +1,10 @@
+<div class="container">
+
+    {% include 'patient_detail.html' %}
+</div>
+
 <div>
+
     <form action="{% url 'med_test1_app:create_med_test1_report' %}" method="post">
         {% csrf_token %}
         <input type="number" name="id" id="id" value="{{patient.id}}" hidden>

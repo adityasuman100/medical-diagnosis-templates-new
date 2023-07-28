@@ -203,6 +203,12 @@ def create_med_test1_report(request):
         echo.t36_2=form_data.get('t36_2', None)
         echo.t36_3=form_data.get('t36_3', None)
 
+        # Pericardial Effusion
+        echo.t40=form_data.get('t40', None)
+        echo.t40_1=form_data.get('t40_1', None)
+        echo.t40_2=form_data.get('t40_2', None)
+        echo.t40_3=form_data.get('t40_3', None)
+
         echo.t37=form_data.get('t37', "")
         echo.t38=form_data.get('t38', "")
         echo.t39=form_data.get('t39', "")
@@ -500,6 +506,44 @@ def generate_pdf(request):
     return response
 
 
+# for footer in pdf
+from reportlab.pdfgen import canvas
+from reportlab.platypus import (SimpleDocTemplate, Paragraph, PageBreak)
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.pagesizes import LETTER
+
+
+class FooterCanvas(canvas.Canvas):
+
+    def __init__(self, *args, **kwargs):
+        canvas.Canvas.__init__(self, *args, **kwargs)
+        self.pages = []
+
+    def showPage(self):
+        self.pages.append(dict(self.__dict__))
+        self._startPage()
+
+    def save(self):
+        page_count = len(self.pages)
+        for page in self.pages:
+            self.__dict__.update(page)
+            self.draw_canvas(page_count)
+            canvas.Canvas.showPage(self)
+        canvas.Canvas.save(self)
+
+    def draw_canvas(self, page_count):
+        page = "Page %s of %s" % (self._pageNumber, page_count)
+        x = 128
+        self.saveState()
+        self.setStrokeColorRGB(0, 0, 0)
+        self.setLineWidth(0.5)
+        self.line(66, 78, LETTER[0] - 66, 78)
+
+        self.setFont('Times-Roman', 10)
+        self.drawString(66, 65, "This is electronically generated report and does not require any signature")
+        self.drawString(LETTER[0]-x, 65, page)
+        self.restoreState()
+
 
 
 
@@ -780,6 +824,10 @@ def generate_pdf_new(request):
     if r.t36!='Normal':
         t4_data.append(['', 'MPA(mm)', 'RPA(mm)', 'LPA(mm)'])
         t4_data.append(['', r.t36_1, r.t36_2, r.t36_3])
+    t4_data.append(['Pericardial Effusion', r.t40, '', ''])
+    if r.t40!='Absent':
+        t4_data.append(['', 'Anterior to RV(mm)', 'Posterior to LV(mm)', 'Lateral(mm)'])
+        t4_data.append(['', r.t40_1, r.t40_2, r.t40_3])
     # t4_data.append(['Remarks', Paragraph(r.t37.replace('</p>', '</p><br/>')), '', ''])
     # t4_data.append(['Impression', Paragraph(r.t38.replace('</p>', '</p><br/>')), '', ''])
     # t4_data.append(['Plan', Paragraph(r.t39.replace('</p>', '</p><br/>')), '', ''])
@@ -884,7 +932,8 @@ def generate_pdf_new(request):
     elements = [table, Spacer(1, 12), t, heading, Spacer(1, 12), t5, heading1, t1, heading2, t2, heading3, t3, heading4, t4, para1, para2, para3]
     if r.t1_1:
         elements=[table, Spacer(1, 15), t, heading, Spacer(1, 12), Paragraph(r.t1_1.replace('<br>', '<br/>').replace('<p>&nbsp;</p>', '<br/>').replace('</p>', '</p><br/>'))]
-    doc.build(elements)
+    # doc.build(elements)
+    doc.multiBuild(elements, canvasmaker=FooterCanvas)
 
     # File buffer is now at position 0, so we can "rewind" it.
     buffer.seek(0)

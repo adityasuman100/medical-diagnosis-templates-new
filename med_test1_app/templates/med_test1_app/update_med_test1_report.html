@@ -989,25 +989,55 @@
                 </div>
 
             </div>
+            <div class="form-group mb-2 row">
+                <label for="full_name_id" class="control-label col-sm-2 ss ">Pericardial Effusion</label>
+                <div class="col-sm-10 ss">
+
+                    <select style="" class="form-control  custom-select ss collapsible" id="t40" name="t40">
+                        <option {% if 'Absent' in patient.med_test1_report.t40 %} selected {% endif %} value="Absent"> Absent</option>
+                        <option {% if 'Minimal' in patient.med_test1_report.t40 %} selected {% endif %} value="Minimal">Minimal</option>
+                        <option {% if 'Mild' in patient.med_test1_report.t40 %} selected {% endif %} value="Mild">Mild</option>
+                        <option {% if 'Moderate' in patient.med_test1_report.t40 %} selected {% endif %} value="Moderate">Moderate</option>
+                        <option {% if 'Severe' in patient.med_test1_report.t40 %} selected {% endif %} value="Severe">Severe</option>
+
+                    </select>
+                    <div style="display: none;" class="content">
+                        <div class="row">
+                            <div class="col ss">
+                                Anterior to RV(mm)<input value="{{patient.med_test1_report.t40_1}}" type="text" class="form-control" id="t40_1" name="t40_1">
+                            </div>
+                            <div class="col ss">
+                                Posterior to LV(mm)<input value="{{patient.med_test1_report.t40_2}}" type="text" class="form-control " id="t40_2" name="t40_2">
+                            </div>
+                            <div class="col ss">
+                                Lateral(mm)<input value="{{patient.med_test1_report.t40_3}}" type="text" class="form-control " id="t40_3" name="t40_3">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
             <div class="form-group mb-2 row">
                 <label for="full_name_id" class="control-label col-sm-2 ss"><strong>Remarks</strong></label>
                 <div class="form-outline col">
-                    <textarea name="t37" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                    <textarea name="t37" class="form-control" id="cke_t55" rows="4">{{patient.med_test1_report.t37}}</textarea>
                     <!-- <label class="form-label" for="textAreaExample">Remarks</label> -->
                 </div>
             </div>
             <div class="form-group mb-2 row">
                 <label for="full_name_id" class="control-label col-sm-2 ss"><strong>IMPRESSION</strong></label>
                 <div class="form-outline col">
-                    <textarea name="t38" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                    <textarea name="t38" class="form-control" id="cke_t56" rows="4">{{patient.med_test1_report.t38}}</textarea>
                     <!-- <label class="form-label" for="textAreaExample">IMPRESSION</label> -->
                 </div>
             </div>
             <div class="form-group mb-2 row">
                 <label for="full_name_id" class="control-label col-sm-2 ss"><strong>PLAN</strong></label>
                 <div class="form-outline col">
-                    <textarea name="t39" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                    <textarea name="t39" class="form-control" id="cke_t57" rows="4">{{patient.med_test1_report.t39}}</textarea>
 
                 </div>
             </div>
