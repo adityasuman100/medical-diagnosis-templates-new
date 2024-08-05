@@ -83,10 +83,13 @@ def create_med_test1_report(request):
             return redirect(reverse('patient_app:read_patient')+f'?id={id}')
         
 
-        
-        latest_id=Med_test1_report.objects.latest('id')
+        try:
+            latest_id=Med_test1_report.objects.latest('id')
+            new_lab_no=latest_id.id+1
+        except:
+            new_lab_no=0
         echo=Med_test1_report()
-        echo.lab_no=latest_id.id+1
+        echo.lab_no=new_lab_no+1
         # echo.validated_by=request.user.username
 
         echo.t1_1=form_data.get('t1_1', None)

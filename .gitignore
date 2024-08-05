@@ -1,5 +1,6 @@
 .git/
 db.sqlite3
+.venv
 
 static/css
 static/js
